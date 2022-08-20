@@ -1,0 +1,5 @@
+# simulink ignore
+*.slxc
+*slprj/*
+*.asv
+
