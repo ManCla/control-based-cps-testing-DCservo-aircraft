@@ -16,8 +16,8 @@ end
 %% DC model parameters
 
 % process matrices
-A=[-0.12 0; 1 0];
-B=[5*2.25; 0];
+A=[0 0; 1 0]; % A(1,1) is implemented in simulink to allow non-linear friction model
+B=[5*2.25; 0]*max_int10/10;
 C=eye(2);
 D=[0;0];
 
@@ -26,6 +26,12 @@ D=[0;0];
 
 dead_zone_half_width = 0.3; % this is HALF of the width size
 deadband_width = 0.3;       % this is the WHOLE width size
+
+% negative sign of friction parameters is implemented in simulink
+linear_friction = 0.12;
+quad_friction   = 0.03;
+coulomb_static  = 1;
+coulomb_linear  = 0.5;
 
 %% other parameters
 
