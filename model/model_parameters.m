@@ -13,11 +13,21 @@ else
     disp("--all tests will have wrong initialization.")
 end
 
+%% DC model parameters
+
 % process matrices
 A=[-0.12 0; 1 0];
 B=[5*2.25; 0];
 C=eye(2);
 D=[0;0];
+
+%% non-linearities parameters
+% quite large for now so that they appear clearly
+
+dead_zone_half_width = 0.3; % this is HALF of the width size
+deadband_width = 0.3;       % this is the WHOLE width size
+
+%% other parameters
 
 % sampling time of control loop
 st=0.05; % 50[ms]
