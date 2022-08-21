@@ -1,3 +1,4 @@
+clear all
 
 addpath('model/')   % path containig the simulink model
 addpath('testing')  % path for implementation of testing approach
@@ -41,4 +42,10 @@ test_results = sim_output.data; % output traces extraction
 
 % plot results
 figure(2)
-plot(test_results)
+plot(test_results),grid
+
+[freq_peaks,amp_peaks] = fA_main_components(reference(:,2), sampling_time, settle_time);
+figure(3)
+scatter(freq_peaks,amp_peaks,20,'blue','x'),grid
+set(gca,'xscale','log')
+set(gca,'yscale','log')
