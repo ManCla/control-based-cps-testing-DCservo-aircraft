@@ -15,8 +15,6 @@ fnl_coulomb   = 2; % coulomb friction (static+linear)
 
 %% test parameters
 
-test_duration = 30;
-
 input_non_linearity = inl_none;
 friction_non_linearity = fnl_linear;
 
@@ -24,6 +22,11 @@ friction_non_linearity = fnl_linear;
 if input_non_linearity~=0 && friction_non_linearity~=0
     disp('Are you sure you want to apply two non-linearities at once?')
 end
+
+test_duration = 30;   % how long the test will last
+reference = [0,  0;   % test input
+             1, 50;
+             2, 0];
 
 %% test execution
 

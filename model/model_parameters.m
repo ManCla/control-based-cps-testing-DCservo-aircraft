@@ -13,6 +13,10 @@ else
     disp("--all tests will have wrong initialization.")
 end
 
+%% sampling time of control loop
+% used in ZOH of reference generator and A/D converter
+ctrl_loop_sampling_time=0.05; % 50[ms]
+
 %% DC model parameters
 
 % process matrices
@@ -34,16 +38,9 @@ quad_friction   = 0.03;
 coulomb_static  = 1;
 coulomb_linear  = 0.5;
 
-%% other parameters
+%% A/D and D/A parameters
 
-% sampling time of control loop
-st=0.05; % 50[ms]
-
-% square wave reference signal
-ramp=255;  % amplitude
-rfq=0.1;   % [Hz]
-
-% number of bits A/D and D/A
+% number of bits
 n_bits=10;
 max_int10=2^(n_bits-1);
 
