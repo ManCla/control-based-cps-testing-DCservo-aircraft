@@ -24,12 +24,15 @@ function [freq_peaks, amp_peaks] = fA_main_components(signal, sampling_time, set
     test_duration = length(signal)*sampling_time-settle_time;
     num_samples = length(values);
 
-    % compute fft
+    % compute fft -- TODO: move to aux function so can use it for output as
+    %                      well
     ref_fft = abs(fft(values)/num_samples); % compute abs of fft and normalize over numb of samples
     ref_fft = ref_fft(1:floor(num_samples/2)+1);
     freqs = (1/test_duration)*(0:(num_samples/2));
     % find peaks
     [ref_peaks, ref_peaks_indexes] = findpeaks(ref_fft);
+    % TODO: this exludes the zero freq that we should include for the
+    %       Dcservo
     freq_peaks = freqs(ref_peaks_indexes);
     % select only peaks above relative threshold
     indexes = ref_peaks>(peaks_threshold*max(ref_fft));
