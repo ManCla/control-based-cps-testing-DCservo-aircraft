@@ -16,7 +16,8 @@ end
 %% DC model parameters
 
 % process matrices
-A=[0 0; 1 0]; % A(1,1) is implemented in simulink to allow non-linear friction model
+A=[0 0; 1 0]; % matrix element A(1,1) is implemented in simulink to allow
+              % non-linear friction model
 B=[5*2.25; 0]*max_int10/10;
 C=eye(2);
 D=[0;0];

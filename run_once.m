@@ -15,6 +15,8 @@ fnl_coulomb   = 2; % coulomb friction (static+linear)
 
 %% test parameters
 
+test_duration = 30;
+
 input_non_linearity = inl_none;
 friction_non_linearity = fnl_linear;
 
@@ -25,6 +27,6 @@ end
 
 %% test execution
 
-test_results = sim('DCservo.slx').data;
-
+sim_output = sim('DCservo.slx');
+test_results = sim_output.data;
 plot(test_results)
