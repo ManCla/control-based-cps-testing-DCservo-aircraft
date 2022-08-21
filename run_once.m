@@ -3,6 +3,8 @@ clear all
 addpath('model/')   % path containig the simulink model
 addpath('testing')  % path for implementation of testing approach
 
+data_directory = 'dcServo_test_data/';
+
 %% variables for readable naming
 % NOTE: the actual values are important as they are used for routing by
 %       the Multi-Port Switch simulink block.
@@ -38,14 +40,8 @@ time_scaling = 0.1;
 %% test execution
 
 sim_output = sim('DCservo.slx');
-test_results = sim_output.data; % output traces extraction
+test_results = [sim_output.data.time, sim_output.data.data]; % output traces extraction
 
-% plot results
-figure(2)
-plot(test_results),grid
-
-[freq_peaks,amp_peaks] = fA_main_components(reference(:,2), sampling_time, settle_time);
-figure(3)
-scatter(freq_peaks,amp_peaks,20,'blue','x'),grid
-set(gca,'xscale','log')
-set(gca,'yscale','log')
+%% write traces to csv
+file_path = sprintf('%s%s-%f-%f.csv',data_directory,shape,amplitude,time_scaling);
+writematrix(test_results,file_path)
