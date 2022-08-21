@@ -17,15 +17,6 @@ end
 % used in ZOH of reference generator and A/D converter
 ctrl_loop_sampling_time=0.05; % 50[ms]
 
-%% DC model parameters
-
-% process matrices
-A=[0 0; 1 0]; % matrix element A(1,1) is implemented in simulink to allow
-              % non-linear friction model
-B=[5*2.25; 0]*max_int10/10;
-C=eye(2);
-D=[0;0];
-
 %% non-linearities parameters
 % quite large for now so that they appear clearly
 
@@ -57,3 +48,12 @@ Tpwm=0.05;     %[Hz]
 TfilterPWM=140; % time constant of analog filter
 fo=[1/TfilterPWM 1];
 afDen=conv(fo,fo);
+
+%% DC model parameters
+
+% process matrices
+A=[0 0; 1 0]; % matrix element A(1,1) is implemented in simulink to allow
+              % non-linear friction model
+B=[5*2.25; 0]*max_int10/10;
+C=eye(2);
+D=[0;0];
