@@ -1,20 +1,7 @@
-clear all
-
-addpath('model/')   % path containig the simulink model
-addpath('testing')  % path for implementation of testing approach
-
-data_directory = 'dcServo_test_data/';
-
-%% variables for readable naming
-% NOTE: the actual values are important as they are used for routing by
-%       the Multi-Port Switch simulink block.
-inl_none      = 0; % no input non-linearity
-inl_dead_zone = 1; % dead-zone input non-linearity
-inl_backlash  = 2; % backlash input non-linearity
-
-fnl_linear    = 0; % linear friction
-fnl_quadratic = 1; % quadratic friction
-fnl_coulomb   = 2; % coulomb friction (static+linear)
+%{
+Script to run run one specific test. Results are stored in csv file in
+target directory and can be displayed with the plotting script.
+%}
 
 %% test parameters
 
@@ -30,7 +17,7 @@ if input_non_linearity~=0 && friction_non_linearity~=0
     disp('Are you sure you want to apply two non-linearities at once?')
 end
 
-% reference definition
+%% test case definition
 shape = 'steps';
 amplitude = 5;
 time_scaling = 0.1;

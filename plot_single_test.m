@@ -1,6 +1,9 @@
+%{
+Script to plot and analyse the resutls of a test from the traces recorded
+in the csv file.
+%}
 
 %% open file
-data_directory = 'dcServo_test_data/';
 
 shape = 'steps';
 amplitude = 5;
@@ -34,9 +37,11 @@ disp(dof)
 
 %% plot
 
+% time domain plotting
 figure(2)
 plot(time,data),grid
 
+% frequency domain plotting
 figure(3)
 clf
 hold on
