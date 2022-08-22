@@ -13,12 +13,29 @@ test_results = readmatrix(file_path);
 time = test_results(:,1);
 data = test_results(:,2:end);
 
-%% plot results
+%% analyse and plot results
+% full spectra of reference and output
+[ref_freqs,ref_amps] = fourier_transform_wrap(test_results(settle_time/sampling_time:end,2), sampling_time);
+[out_freqs,out_amps] = fourier_transform_wrap(test_results(settle_time/sampling_time:end,3), sampling_time);
+% main components
+[ref_freq_peaks,ref_amp_peaks] = fA_main_components(test_results(:,2), sampling_time, settle_time);
+[out_freq_peaks,put_amp_peaks] = fA_main_components(test_results(:,3), sampling_time, settle_time);
+% degree of non-linearity
+
+% filtering degree
+filtering_degree(test_results(:,3),sampling_time,settle_time,ref_freq_peaks,ref_amp_peaks)
+
 figure(2)
 plot(time,data),grid
 
-[freq_peaks,amp_peaks] = fA_main_components(test_results(:,2), sampling_time, settle_time);
 figure(3)
-scatter(freq_peaks,amp_peaks,20,'blue','x'),grid
+clf
+hold on
+scatter(ref_freqs,ref_amps,5,'blue','o')
+scatter(out_freqs,out_amps,5,'red','o')
+scatter(ref_freq_peaks,ref_amp_peaks,80,'blue','x')
+scatter(out_freq_peaks,out_amp_peaks,80,'red','x')
+grid
 set(gca,'xscale','log')
 set(gca,'yscale','log')
+hold off
