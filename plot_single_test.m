@@ -6,7 +6,7 @@ shape = 'steps';
 amplitude = 5;
 time_scaling = 0.1;
 
-file_path = sprintf('%s%s-%f-%f.csv',data_directory,shape,amplitude,time_scaling);
+file_path = sprintf('%s%s-%g-%g.csv',data_directory,shape,amplitude,time_scaling);
 test_results = readmatrix(file_path);
 
 %% unpack data
@@ -23,7 +23,9 @@ data = test_results(:,2:end);
 % degree of non-linearity
 
 % filtering degree
-filtering_degree(test_results(:,3),sampling_time,settle_time,ref_freq_peaks,ref_amp_peaks)
+dof = filtering_degree(test_results(:,3),sampling_time,settle_time,ref_freq_peaks,ref_amp_peaks);
+disp("Filtering degree is: ")
+disp(dof)
 
 figure(2)
 plot(time,data),grid

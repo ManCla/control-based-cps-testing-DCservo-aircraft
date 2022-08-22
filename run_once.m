@@ -43,5 +43,5 @@ sim_output = sim('DCservo.slx');
 test_results = [sim_output.data.time, sim_output.data.data]; % output traces extraction
 
 %% write traces to csv
-file_path = sprintf('%s%s-%f-%f.csv',data_directory,shape,amplitude,time_scaling);
+file_path = sprintf('%s%s-%g-%g.csv',data_directory,shape,amplitude,time_scaling);
 writematrix(test_results,file_path)
