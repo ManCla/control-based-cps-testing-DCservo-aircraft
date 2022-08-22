@@ -17,11 +17,15 @@ OUTPUTS:
 
 function fd = filtering_degree(measurement,sampling_time,settle_time, ...
                                              main_freqs,main_amps)
-    % init function output
-    fd = zeros(1,length(main_freqs))
 
+    to_analyse = measurement(settle_time/sampling_time:end); % exclude settling
     % compute fft of measurements
+    [out_freqs,out_amps] = fourier_transform_wrap(to_analyse, sampling_time);
 
     % for each input component compute ratio and build vector
+    % indexes of main components
+    indexes = ismember(out_freqs, main_freqs);
+    % amplitude ratios at main components frequencies
+    fd = out_amps(indexes)./main_amps;
 
 end
