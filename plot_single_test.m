@@ -3,17 +3,22 @@ Script to plot and analyse the resutls of a test from the traces recorded
 in the csv file.
 %}
 
-%% open file
-
-shape = 'steps';
-amplitude = 5;
-time_scaling = 0.1;
+%% testing parameters
 
 settle_time = 5;
 sampling_time = 0.05;
 
-file_path = sprintf('%s%s-%g-%g.csv',data_directory,shape,amplitude,time_scaling);
-test_results = readmatrix(file_path);
+input_non_linearity = inl_none;
+friction_non_linearity = fnl_quadratic;
+
+%% test file
+
+shape = 'steps';
+amplitude = 7;
+time_scaling = 0.1;
+
+target_file_path = printf_test_file_path(input_non_linearity, friction_non_linearity, shape, amplitude, time_scaling,dir_params);
+test_results = readmatrix(target_file_path);
 
 %% unpack data
 time = test_results(:,1);
