@@ -2,6 +2,9 @@
 Initialization script.
 %}
 
+close all
+clear all
+
 %% initialize and define paths
 
 addpath('model/')   % path containig the simulink model
