@@ -21,8 +21,8 @@ end
 shape = 'steps';
 amplitude = 5;
 time_scaling = 0.1;
-[reference, test_duration] = test_case(shape, amplitude, time_scaling,...
-                                       num_periods, sampling_time, settle_time);
+[reference, test_duration] = generate_input_sequence( ...
+        shape, amplitude, time_scaling,num_periods, sampling_time, settle_time);
 
 %% test execution
 

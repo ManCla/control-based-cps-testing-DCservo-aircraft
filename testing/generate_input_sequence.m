@@ -18,7 +18,8 @@ amplitude range of 1 (i.e. max(shape)-min(shape)==1 ).
 They also generate a signal centered around 0.
 %}
 
-function [reference, test_duration] = test_case(shape, amplitude, time_scale, num_periods, sample_time, settle)
+function [reference, test_duration] = generate_input_sequence( ...
+            shape, amplitude, time_scale, num_periods, sample_time, settle)
 
     period_duration = 1 / time_scale;
     test_duration   = period_duration * num_periods + settle;
