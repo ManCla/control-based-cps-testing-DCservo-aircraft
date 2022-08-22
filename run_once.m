@@ -18,13 +18,13 @@ if input_non_linearity~=0 && friction_non_linearity~=0
 end
 
 %% test case definition
-shape = 'steps';
-amplitude = 7;
-time_scaling = 0.1;
+test_case.shape = 'steps';
+test_case.amplitude = 5;
+test_case.time_scaling = 0.1;
 
 %% test execution
-target_file_path = printf_test_file_path(input_non_linearity, friction_non_linearity, shape, amplitude, time_scaling, dir_params);
-test_results = run_single_test(target_file_path, num_periods, sampling_time, settle_time,dir_params);
+target_file_path = printf_test_file_path(input_non_linearity, friction_non_linearity, test_case, dir_params);
+test_results = run_single_test(target_file_path, num_periods, sampling_time, settle_time, dir_params);
 
 %% write traces to csv
 % this overwrites the existing file with the same data

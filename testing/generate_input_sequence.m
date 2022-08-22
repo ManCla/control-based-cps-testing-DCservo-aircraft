@@ -4,7 +4,7 @@ given test case.
 A test case is defined by:
     - shape
     - amplitude
-    - time_scale
+    - time_scaling
 OUTPUT:
     - a 2 column matrix [times, values]
     - duration of test (should be equal to times(end)+sampe_time)
@@ -18,29 +18,29 @@ amplitude range of 1 (i.e. max(shape)-min(shape)==1 ).
 They also generate a signal centered around 0.
 %}
 
-function [reference, test_duration] = generate_input_sequence( ...
-            shape, amplitude, time_scale, num_periods, sample_time, settle)
+function [reference, test_duration] = generate_input_sequence(test_case, num_periods, sample_time, settle)
 
-    period_duration = 1 / time_scale;
+    period_duration = 1 / test_case.time_scaling;
     test_duration   = period_duration * num_periods + settle;
     num_samples     = floor(test_duration/sample_time) + 1;
     time_vector     = linspace(0,test_duration,num_samples);
 
-    switch shape
+    scaled_time = test_case.time_scaling*time_vector; % time scaling
+    switch test_case.shape
         case 'sinus'
-            ref = amplitude.*arrayfun(@sinus, time_scale*time_vector);
+            ref = arrayfun(@sinus, scaled_time);
         case 'steps'
-            ref = amplitude.*arrayfun(@steps, time_scale*time_vector);
+            ref = arrayfun(@steps, scaled_time);
         case 'ramp'
-            ref = amplitude.*arrayfun(@ramp, time_scale*time_vector);
+            ref = arrayfun(@ramp, scaled_time);
         case 'trapezoidal'
-            ref = amplitude.*arrayfun(@trapezoidal, time_scale*time_vector);
+            ref = arrayfun(@trapezoidal, scaled_time);
         case 'triangular'
-            ref = amplitude.*arrayfun(@triangular, time_scale*time_vector);
+            ref = arrayfun(@triangular, scaled_time);
         otherwise
             disp('ERROR: input shape not found')
     end
-
+    ref = test_case.amplitude.*ref; % amplitude scaling
     reference = [time_vector', ref'];
 
 end
