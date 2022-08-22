@@ -11,29 +11,28 @@ INPUTS:
 OUTPUTS:
  - freq_peaks    : frequencies of main components
  - amp_peaks     : amplitudes of main components
+
+NOTE: the peaks are selected according to the relative threshold defined by
+the local parameter peaks_threshold. This parameter defines the percentage
+of the amplitude of the largest peak above which we consider the other
+peaks.
 %}
 
 
 function [freq_peaks, amp_peaks] = fA_main_components(signal, sampling_time, settle_time)
     
-    % LOCAL PARAMETER
+    %%% FUNCTION PARAMETER %%%
     peaks_threshold = 0.1; % threshold above which we consider the peaks relevant
+    %%%
 
-    % preliminaries
-    values = signal(settle_time/sampling_time:end);
-    test_duration = length(signal)*sampling_time-settle_time;
-    num_samples = length(values);
-
-    % compute fft -- TODO: move to aux function so can use it for output as
-    %                      well
-    ref_fft = abs(fft(values)/num_samples); % compute abs of fft and normalize over numb of samples
-    ref_fft = ref_fft(1:floor(num_samples/2)+1);
-    freqs = (1/test_duration)*(0:(num_samples/2));
-    % find peaks
-    [ref_peaks, ref_peaks_indexes] = findpeaks(ref_fft);
-    % TODO: this exludes the zero freq that we should include for the
-    %       Dcservo
+    values = signal(settle_time/sampling_time:end); % exclude settling
+    [freqs, ref_fft] = fourier_transform_wrap(values, sampling_time); % fft computation
+    [ref_peaks, ref_peaks_indexes] = findpeaks(ref_fft); % find peaks
+    % manually include zero frequency
+    ref_peaks = [ref_fft(1), ref_peaks];
+    ref_peaks_indexes = [1,ref_peaks_indexes];
     freq_peaks = freqs(ref_peaks_indexes);
+
     % select only peaks above relative threshold
     indexes = ref_peaks>(peaks_threshold*max(ref_fft));
     amp_peaks  = ref_peaks(indexes);
