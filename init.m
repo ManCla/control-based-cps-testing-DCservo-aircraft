@@ -29,3 +29,17 @@ inl_backlash  = 2; % backlash input non-linearity
 fnl_linear    = 0; % linear friction
 fnl_quadratic = 1; % quadratic friction
 fnl_coulomb   = 2; % coulomb friction (static+linear)
+
+%% testing parameters
+
+num_periods = 5;      % number of input periods included in test
+sampling_time = 0.05; % should be taken from SUT
+settle_time = 5;      % extra time in test for allowing for transients
+
+input_non_linearity = inl_none;
+friction_non_linearity = fnl_quadratic;
+
+% check if we have both input and friction non-linearities
+if input_non_linearity~=0 && friction_non_linearity~=0
+    disp('Are you sure you want to apply two non-linearities at once?')
+end

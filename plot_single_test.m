@@ -3,14 +3,6 @@ Script to plot and analyse the resutls of a test from the traces recorded
 in the csv file.
 %}
 
-%% testing parameters
-
-settle_time = 5;
-sampling_time = 0.05;
-
-input_non_linearity = inl_none;
-friction_non_linearity = fnl_quadratic;
-
 %% test file
 
 test_case.shape = 'steps';
