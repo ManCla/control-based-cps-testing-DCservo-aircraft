@@ -56,7 +56,7 @@ function shapes = get_shapes_list()
 end
 
 function val = sinus(t)
-    val = sin(t*(2*pi));
+    val = 0.5*sin(t*(2*pi));
 end
 
 function val = steps(t)
