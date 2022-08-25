@@ -31,10 +31,10 @@ nlth_upper_bound = [nlth_upper_bound;
 next_freq = sample_frequency(nlth_upper_bound, delta_amp)
 while next_freq
     [amp_max, amp_min] = binary_search_sinusoidal(sut_nl, nl_threshold, num_periods, sampling_time, settle_time, ...
-                                                  f_max, delta_amp, amplitude_max, dir_params);
+                                                  next_freq, delta_amp, amplitude_max, dir_params);
     nlth_upper_bound = [nlth_upper_bound;
-                        f_max, amp_max, amp_min]; % add to matrix of upper bounds
-    next_freq = sample_frequency(nlth_upper_bound)
+                        next_freq, amp_max, amp_min]; % add to matrix of upper bounds
+    next_freq = sample_frequency(nlth_upper_bound, delta_amp)
 end
 
 
