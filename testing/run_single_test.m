@@ -16,7 +16,7 @@ function test_results = run_single_test(test_file_path, num_periods, sampling_ti
         sim_output = sim('DCservo.slx',[],options); % call simulink model
         test_results = [sim_output.data.time, sim_output.data.data]; % output traces extraction
     else
-        disp('Test already executed!')
+        disp('-- Test already executed!')
         test_results = readmatrix(test_file_path); % read stored data
     end
 end
