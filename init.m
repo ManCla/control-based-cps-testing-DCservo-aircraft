@@ -8,7 +8,8 @@ clear all
 %% initialize and define paths
 
 addpath('model') % path containig the simulink model
-addpath('testing/analysis') % paths for implementation of testing approach
+addpath('testing') % paths for implementation of testing approach
+addpath('testing/analysis')
 addpath('testing/utils')
 addpath('testing/approach/')
 
