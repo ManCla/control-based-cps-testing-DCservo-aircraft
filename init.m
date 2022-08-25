@@ -7,8 +7,10 @@ clear all
 
 %% initialize and define paths
 
-addpath('model')   % path containig the simulink model
-addpath('testing')  % path for implementation of testing approach
+addpath('model') % path containig the simulink model
+addpath('testing/analysis') % paths for implementation of testing approach
+addpath('testing/utils')
+addpath('testing/approach/')
 
 dir_params.data_directory = 'dcServo_test_data';
 % string names of non linearities to separate data of different SUTs
