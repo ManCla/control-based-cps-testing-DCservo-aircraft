@@ -29,9 +29,6 @@ while next_freq
     next_freq = sample_frequency(nlth_upper_bound, delta_amp)
 end
 
-directory = sprintf('%s/%s-%s/',dir_params.data_directory, ...
-                                dir_params.inl_names(sut_nl.input_non_linearity+1), ...
-                                dir_params.fnl_names(sut_nl.friction_non_linearity+1));
 nlth_file_path = sprintf("%s/nlth_upper_bound_fmin%g_fmax%g_damp%g_amax%g.csv", ...
                          directory,f_min,f_max,delta_amp,amplitude_max);
 writematrix(nlth_upper_bound,nlth_file_path)
