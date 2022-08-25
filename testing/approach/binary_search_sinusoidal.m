@@ -6,7 +6,7 @@ non-linear threshold upper bound given by the sinusoidal inputs.
 function [amp_max, amp_min] = binary_search_sinusoidal(sut_nl, nl_threshold, num_periods,...
                            sampling_time, settle_time, frequency, delta_amp, amplitude_max, dir_params)
     fprintf("Binary search along freqency %f\n",frequency);
-    test_case.shape = 'steps';
+    test_case.shape = 'sinus';
     test_case.time_scaling = frequency; % this assumes shapes are defined over 1 second
                                         % AND that main freq component is the lowest
     % init binary search
