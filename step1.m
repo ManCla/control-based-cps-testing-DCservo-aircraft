@@ -15,25 +15,27 @@ amplitude_max = 20;
 delta_amp = 0.3;
 
 %% init search - start with thresholds at f_min and f_max
-
-% implement ordered insert in vector and while loop for selecting
-% frequencies instead of this grid search
-
+% minimum frequency
 [amp_max, amp_min] = binary_search_sinusoidal(sut_nl, nl_threshold, num_periods, sampling_time, settle_time, ...
                               f_min, delta_amp, amplitude_max, dir_params);
 nlth_upper_bound = [f_min, amp_max, amp_min]; % initialize matrix of upper bounds
-
-for f=f_min+0.1:0.1:f_max
-    [amp_max, amp_min] = binary_search_sinusoidal(sut_nl, nl_threshold, num_periods, sampling_time, settle_time, ...
-                                       f, delta_amp, amplitude_max, dir_params);
-    nlth_upper_bound = [nlth_upper_bound;
-                        f, amp_max, amp_min]; % add to matrix of upper bounds
-end
-
+% maximum frequency
 [amp_max, amp_min] = binary_search_sinusoidal(sut_nl, nl_threshold, num_periods, sampling_time, settle_time, ...
                               f_max, delta_amp, amplitude_max, dir_params);
 nlth_upper_bound = [nlth_upper_bound;
                     f_max, amp_max, amp_min]; % add to matrix of upper bounds
+
+%% iterative exploration
+% iterate until we get desired resolution along amplitude axis for
+% upperbound of nonlinear threshold
+next_freq = sample_frequency(nlth_upper_bound, delta_amp)
+while next_freq
+    [amp_max, amp_min] = binary_search_sinusoidal(sut_nl, nl_threshold, num_periods, sampling_time, settle_time, ...
+                                                  f_max, delta_amp, amplitude_max, dir_params);
+    nlth_upper_bound = [nlth_upper_bound;
+                        f_max, amp_max, amp_min]; % add to matrix of upper bounds
+    next_freq = sample_frequency(nlth_upper_bound)
+end
 
 
 %% plotting
