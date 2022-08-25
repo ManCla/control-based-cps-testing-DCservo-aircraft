@@ -2,13 +2,13 @@
 function to parse the path to a test file
 %}
 
-function [data_directory,in_nl,fr_nl,test_case] = scanf_test_file_path(test_file_path,dir_params)
+function [data_directory,sut_nl,test_case] = scanf_test_file_path(test_file_path,dir_params)
     % assumed path formatting is '%s/%s-%s/%s-%g-%g.csv'
     [data_directory,remain] = strtok(test_file_path,'/');
     [tmp,remain] = strtok(remain(2:end),'-');
-    in_nl = find(tmp==dir_params.inl_names)-1;
+    sut_nl.input_non_linearity = find(tmp==dir_params.inl_names)-1;
     [tmp,remain] = strtok(remain(2:end),'/');
-    fr_nl = find(tmp==dir_params.fnl_names)-1;
+    sut_nl.friction_non_linearity = find(tmp==dir_params.fnl_names)-1;
     [test_case.shape,remain] = strtok(remain(2:end),'-');
     % next elements need to be formattetd
     [tmp,remain] = strtok(remain(2:end),'-');

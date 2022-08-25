@@ -9,7 +9,7 @@ test_case.amplitude = 5;
 test_case.time_scaling = 0.1;
 
 %% test execution
-target_file_path = printf_test_file_path(input_non_linearity, friction_non_linearity, test_case, dir_params);
+target_file_path = printf_test_file_path(sut_nl, test_case, dir_params);
 test_results = run_single_test(target_file_path, num_periods, sampling_time, settle_time, dir_params);
 
 %% write traces to csv
