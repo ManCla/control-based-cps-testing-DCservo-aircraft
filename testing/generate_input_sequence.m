@@ -51,10 +51,6 @@ end
 %%% SHAPE FUNCTIONS %%%
 %%%%%%%%%%%%%%%%%%%%%%%
 
-function shapes = get_shapes_list()
-    shapes = ['steps', 'ramp', 'trapezoidal', 'triangular', 'sinus'];
-end
-
 function val = sinus(t)
     val = 0.5*sin(t*(2*pi));
 end
