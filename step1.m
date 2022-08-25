@@ -6,14 +6,6 @@ frequencyes and amplitudes to get an upper bound for the non-linearity
 threshold based on sinusoidal inputs
 %}
 
-%% approach inputs
-% frequency bounds
-f_min = 0.005;
-f_max = 3;
-% ampliltude bound
-amplitude_max = 20;
-delta_amp = 0.3;
-
 %% init search - start with thresholds at f_min and f_max
 % minimum frequency
 [amp_max, amp_min] = binary_search_sinusoidal(sut_nl, nl_threshold, num_periods, sampling_time, settle_time, ...
