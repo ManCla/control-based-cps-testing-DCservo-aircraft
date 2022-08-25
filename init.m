@@ -1,9 +1,14 @@
-%{
-Initialization script.
-%}
-
 close all
 clear all
+
+%{
+Initialization script for the DC servo case of study.
+Only assignments and small input sanity checks can go in here.
+It initializes:
+ - paths and directories
+ - non linearites namings
+ - testing approach parameters
+%}
 
 %% initialize and define paths and directories
 
@@ -59,3 +64,8 @@ f_max = 3;             % frequency range max
 freq_resolution = 0.1; % freq resolution to uniformly sample in test case generation
 amplitude_max = 20;    % ampliltude bound
 delta_amp = 0.3;       % amplitude resolution
+
+%% subdirectory name for given type of non-linearity
+directory = sprintf('%s/%s-%s/',dir_params.data_directory, ...
+                                dir_params.inl_names(sut_nl.input_non_linearity+1), ...
+                                dir_params.fnl_names(sut_nl.friction_non_linearity+1));
