@@ -41,6 +41,9 @@ settle_time = 5;      % extra time in test for allowing for transients
 sut_nl.input_non_linearity = inl_none;
 sut_nl.friction_non_linearity = fnl_linear;
 
+nl_threshold = 0.15;  % threshold on dnl above which we consider the teest
+                      % to behave non-linearly
+
 % check if we have both input and friction non-linearities
 if sut_nl.input_non_linearity~=0 && sut_nl.friction_non_linearity~=0
     disp('Are you sure you want to apply two non-linearities at once?')
