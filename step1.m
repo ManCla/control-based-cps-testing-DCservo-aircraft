@@ -28,7 +28,7 @@ nlth_upper_bound = [nlth_upper_bound;
 %% iterative exploration
 % iterate until we get desired resolution along amplitude axis for
 % upperbound of nonlinear threshold
-next_freq = sample_frequency(nlth_upper_bound, delta_amp)
+next_freq = sample_frequency(nlth_upper_bound, delta_amp);
 while next_freq
     [amp_max, amp_min] = binary_search_sinusoidal(sut_nl, nl_threshold, num_periods, sampling_time, settle_time, ...
                                                   next_freq, delta_amp, amplitude_max, dir_params);
@@ -37,9 +37,16 @@ while next_freq
     next_freq = sample_frequency(nlth_upper_bound, delta_amp)
 end
 
+directory = sprintf('%s/%s-%s/',dir_params.data_directory, ...
+                                dir_params.inl_names(sut_nl.input_non_linearity+1), ...
+                                dir_params.fnl_names(sut_nl.friction_non_linearity+1));
+nlth_name = sprintf("%s/nlth_upper_bound_fmin%g_fmax%g_damp%g_amax%g.csv", ...
+                    directory,f_min,f_max,delta_amp,amplitude_max);
+writematrix(nlth_upper_bound,nlth_name)
 
 %% plotting
 figure
 hold on
 plot(nlth_upper_bound(:,1), nlth_upper_bound(:,2))
 plot(nlth_upper_bound(:,1), nlth_upper_bound(:,3))
+hold off
