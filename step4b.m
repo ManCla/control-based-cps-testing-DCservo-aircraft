@@ -22,7 +22,7 @@ for s_idx = 1:length(shapes)
     fa_file_path = sprintf("%s%s-fa-points.csv",directory,shapes(s_idx));
     fa_points = readmatrix(fa_file_path);
     fa_all = [fa_all; fa_points];
-    % TODO: filter out points that show non linear behaviour
+    lin_indexes = fa_points(:,3)<nl_threshold; % filter out points that show non linear behaviour
     dnl = 0.15-min(fa_points(:,3),nl_threshold);
     dof = min(fa_points(:,4),1);
 
@@ -35,7 +35,7 @@ for s_idx = 1:length(shapes)
     set(gca,'xscale','log')
     set(gca,'yscale','log')
     subplot(length(shapes),2,s_idx*2)
-    scatter(fa_points(:,1),fa_points(:,2),4,'CData',dof)
+    scatter(fa_points(lin_indexes,1),fa_points(lin_indexes,2),4,'CData',dof(lin_indexes))
     ylim([0 7])
     grid on
     set(gca,'xscale','log')
@@ -54,13 +54,13 @@ subplot(length(shapes),2,2*length(shapes))
 xlabel('Frequency')
 
 %% plot dnl and dof all shapes together
-
+lin_indexes = fa_all(:,3)<nl_threshold; % filter out points that show non linear behaviour
 dnl = min(fa_all(:,3),nl_threshold);
 dof = min(fa_all(:,4),1);
 
 figure(2)
 subplot(1,2,1)
-scatter(fa_all(:,1),fa_all(:,2),4,'CData',fa_all(:,3))
+scatter(fa_all(:,1),fa_all(:,2),4,'CData',dnl)
 xlabel('Frequency')
 ylabel('Amplitude')
 ylim([0 7])
@@ -68,7 +68,7 @@ grid on
 set(gca,'xscale','log')
 set(gca,'yscale','log')
 subplot(1,2,2)
-scatter(fa_all(:,1),fa_all(:,2),4,'CData',fa_all(:,4))
+scatter(fa_all(lin_indexes,1),fa_all(lin_indexes,2),4,'CData',dof(lin_indexes))
 xlabel('Frequency')
 ylim([0 7])
 grid on
