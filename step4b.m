@@ -11,7 +11,9 @@ We want to display:
 
 %}
 
-%% actual plotting
+%% plot dnl and dof by shapes
+
+fa_all = [];
 
 % iterate over shapes
 for s_idx = 1:length(shapes)
@@ -19,8 +21,9 @@ for s_idx = 1:length(shapes)
     % open file for storing the fA points
     fa_file_path = sprintf("%s%s-fa-points.csv",directory,shapes(s_idx));
     fa_points = readmatrix(fa_file_path);
+    fa_all = [fa_all; fa_points];
     % TODO: filter out points that show non linear behaviour
-    dnl = min(fa_points(:,3),nl_threshold);
+    dnl = 0.15-min(fa_points(:,3),nl_threshold);
     dof = min(fa_points(:,4),1);
 
     figure(1)
@@ -46,6 +49,28 @@ title('Degre of Non-Linearity')
 subplot(length(shapes),2,2)
 title('Degre of Filtering')
 subplot(length(shapes),2,2*length(shapes)-1)
-xlabel('frequency')
+xlabel('Frequency')
 subplot(length(shapes),2,2*length(shapes))
-xlabel('frequency')
+xlabel('Frequency')
+
+%% plot dnl and dof all shapes together
+
+dnl = min(fa_all(:,3),nl_threshold);
+dof = min(fa_all(:,4),1);
+
+figure(2)
+subplot(1,2,1)
+scatter(fa_all(:,1),fa_all(:,2),4,'CData',fa_all(:,3))
+xlabel('Frequency')
+ylabel('Amplitude')
+ylim([0 7])
+grid on
+set(gca,'xscale','log')
+set(gca,'yscale','log')
+subplot(1,2,2)
+scatter(fa_all(:,1),fa_all(:,2),4,'CData',fa_all(:,4))
+xlabel('Frequency')
+ylim([0 7])
+grid on
+set(gca,'xscale','log')
+set(gca,'yscale','log')
