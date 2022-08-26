@@ -8,7 +8,7 @@ for s_idx = 1:length(shapes)
     fprintf("Running tests for shape %s\n",shapes(s_idx));
 
     % get test set from file
-    test_cases = readmatrix(sprintf("%s%s.csv",directory,shapes(s_idx)));
+    test_cases = readmatrix(sprintf("%s%s-testset.csv",directory,shapes(s_idx)));
     % all test cases of this iteration will have the same shape
     test_case.shape = shapes(s_idx);
 

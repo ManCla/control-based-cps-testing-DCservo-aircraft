@@ -36,7 +36,7 @@ for s_idx = 1:length(shapes)
     end % frequencies loop
 
     % store test set for shape
-    test_set_file_path = sprintf("%s%s.csv",directory,shapes(s_idx));
+    test_set_file_path = sprintf("%s%s-testset.csv",directory,shapes(s_idx));
     writematrix(test_cases,test_set_file_path);
 
 end % shapes loop
@@ -50,7 +50,8 @@ end % shapes loop
 % iterate over shapes
 for s_idx = 1:length(shapes)
     figure
-    test_cases = readmatrix(sprintf("%s%s.csv",directory,shapes(s_idx)));
+    test_cases = readmatrix(sprintf("%s%s-testset.csv",directory,shapes(s_idx)));
+    fprintf("I have %d tests with shape %s\n",length(test_cases(:,1)),shapes(s_idx));
     scatter(test_cases(:,1),test_cases(:,2))
     grid
     title(sprintf("Test set generated for %s shape",shapes(s_idx)))
