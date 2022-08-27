@@ -12,10 +12,6 @@ test_case.time_scaling = 0.1;
 target_file_path = printf_test_file_path(sut_nl, test_case, dir_params);
 test_results = readmatrix(target_file_path);
 
-%% unpack data
-time = test_results(:,1);
-data = test_results(:,2:end);
-
 %% analyse
 % full spectra of reference and output
 [ref_freqs,ref_amps] = fourier_transform_wrap(test_results(settle_time/sampling_time:end,2), sampling_time);
@@ -36,7 +32,7 @@ disp(dof)
 
 % time domain plotting
 figure(2)
-plot(time,data),grid
+plot(test_results(:,1),test_results(:,2:end)),grid
 
 % frequency domain plotting
 figure(3)
