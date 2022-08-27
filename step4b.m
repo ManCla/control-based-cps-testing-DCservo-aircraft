@@ -11,6 +11,8 @@ We want to display:
 
 %}
 
+dot_size = 8; % size of dots in all scatter plot
+
 %% plot dnl and dof by shapes
 
 fa_all = [];
@@ -28,14 +30,14 @@ for s_idx = 1:length(shapes)
 
     figure(1)
     subplot(length(shapes),2,s_idx*2-1)
-    scatter(fa_points(:,1),fa_points(:,2),4,'CData',dnl)
+    scatter(fa_points(:,1),fa_points(:,2),dot_size,'filled','CData',dnl)
     ylabel(shapes(s_idx))
     ylim([0 7])
     grid on
     set(gca,'xscale','log')
     set(gca,'yscale','log')
     subplot(length(shapes),2,s_idx*2)
-    scatter(fa_points(lin_indexes,1),fa_points(lin_indexes,2),4,'CData',dof(lin_indexes))
+    scatter(fa_points(lin_indexes,1),fa_points(lin_indexes,2),dot_size,'filled','CData',dof(lin_indexes))
     ylim([0 7])
     grid on
     set(gca,'xscale','log')
@@ -60,16 +62,18 @@ dof = min(fa_all(:,4),1);
 
 figure(2)
 subplot(1,2,1)
-scatter(fa_all(:,1),fa_all(:,2),4,'CData',dnl)
+scatter(fa_all(:,1),fa_all(:,2),dot_size,'filled','CData',dnl)
 xlabel('Frequency')
 ylabel('Amplitude')
+title('Degre of Non-Linearity')
 ylim([0 7])
 grid on
 set(gca,'xscale','log')
 set(gca,'yscale','log')
 subplot(1,2,2)
-scatter(fa_all(lin_indexes,1),fa_all(lin_indexes,2),4,'CData',dof(lin_indexes))
+scatter(fa_all(lin_indexes,1),fa_all(lin_indexes,2),dot_size,'filled','CData',dof(lin_indexes))
 xlabel('Frequency')
+title('Degre of Filtering')
 ylim([0 7])
 grid on
 set(gca,'xscale','log')
