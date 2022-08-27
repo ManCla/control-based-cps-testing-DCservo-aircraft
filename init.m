@@ -5,26 +5,20 @@ clear all
 Initialization script for the DC servo case of study.
 Only assignments and small input sanity checks can go in here.
 It initializes:
- - paths and directories
+ - paths
  - non linearites namings
+ - SUT non linearities
  - testing approach parameters
+ - data directories
 %}
 
-%% initialize and define paths and directories
+%% initialize paths
 
 addpath('model') % path containig the simulink model
 addpath('testing') % paths for implementation of testing approach
 addpath('testing/analysis')
 addpath('testing/utils')
 addpath('testing/approach/')
-
-dir_params.data_directory = 'dcServo_test_data';
-% string names of non linearities to separate data of different SUTs
-% (where the different SUTs in this case are always the DC-servo but with
-% different types of non-linearities)
-% used also (only?) for directory generation
-dir_params.inl_names = ["inl_none", "inl_dead_zone", "inl_backlash"];
-dir_params.fnl_names = ["fnl_linear", "fnl_quadratic", "fnl_coulomb"];
 
 %% variables for readable naming
 % NOTE: the actual values are important as they are used for routing by
@@ -66,6 +60,16 @@ amplitude_max = 20;    % ampliltude bound
 delta_amp = 0.3;       % amplitude resolution
 
 %% subdirectory name for given type of non-linearity
+
+dir_params.data_directory = sprintf('dcServo_test_data_%dperiods',num_periods);
+% string names of non linearities to separate data of different SUTs
+% (where the different SUTs in this case are always the DC-servo but with
+% different types of non-linearities)
+% used also (only?) for directory generation
+dir_params.inl_names = ["inl_none", "inl_dead_zone", "inl_backlash"];
+dir_params.fnl_names = ["fnl_linear", "fnl_quadratic", "fnl_coulomb"];
+
+
 directory = sprintf('%s/%s-%s/',dir_params.data_directory, ...
                                 dir_params.inl_names(sut_nl.input_non_linearity+1), ...
                                 dir_params.fnl_names(sut_nl.friction_non_linearity+1));
