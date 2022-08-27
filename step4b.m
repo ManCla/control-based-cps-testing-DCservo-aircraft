@@ -11,7 +11,6 @@ We display:
 %}
 
 %% some plotting parameters
-clf(3)
 dot_size = 8; % size of dots in all scatter plot
 f_min_plot = f_min;
 f_max_plot = 10;
