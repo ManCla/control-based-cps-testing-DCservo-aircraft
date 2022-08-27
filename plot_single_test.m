@@ -33,6 +33,7 @@ disp(dof)
 % time domain plotting
 figure(2)
 plot(test_results(:,1),test_results(:,2:end)),grid
+legend('reference', 'output', 'actuation')
 
 % frequency domain plotting
 figure(3)
