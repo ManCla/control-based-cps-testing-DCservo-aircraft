@@ -19,7 +19,7 @@ We want to display:
 % Hence the frequency vector can be shared across the shapes.
 
 % Initialize test set data with first shape
-first_set = readmatrix(sprintf("%s%s-testset.csv",directory,shapes(s_idx)));
+first_set = readmatrix(sprintf("%s%s-testset.csv",directory,shapes(1)));
 num_tests_per_shape = length(first_set(:,1));
 num_shapes = length(shapes);
 
