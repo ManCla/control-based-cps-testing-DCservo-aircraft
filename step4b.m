@@ -10,8 +10,11 @@ We display:
 
 %}
 
+%% some plotting parameters
 clf(3)
 dot_size = 8; % size of dots in all scatter plot
+f_min_plot = f_min;
+f_max_plot = 10;
 
 %% plot dnl and dof by shapes
 
@@ -32,6 +35,7 @@ for s_idx = 1:length(shapes)
     subplot(length(shapes),2,s_idx*2-1)
     scatter(fa_points(:,1),fa_points(:,2),dot_size,'filled','CData',dnl)
     ylabel(shapes(s_idx))
+    xlim([f_min_plot, f_max_plot])
     ylim([0 7])
     grid on
     set(gca,'xscale','log')
@@ -39,6 +43,7 @@ for s_idx = 1:length(shapes)
     subplot(length(shapes),2,s_idx*2)
     scatter(fa_points(lin_indexes,1),fa_points(lin_indexes,2),dot_size,'filled','CData',dof(lin_indexes))
     ylim([0 7])
+    xlim([f_min_plot, f_max_plot])
     grid on
     set(gca,'xscale','log')
     set(gca,'yscale','log')
@@ -47,8 +52,9 @@ for s_idx = 1:length(shapes)
     subplot(length(shapes),1,s_idx)
     grid on
     hold on
-    plot([min(fa_points(lin_indexes,1)),max(fa_points(lin_indexes,1))],[0.5,0.5],'--r')
+    plot([f_min_plot, f_max_plot],[0.5,0.5],'--r')
     scatter(fa_points(lin_indexes,1),1-dof(lin_indexes),dot_size,'filled','black')
+    xlim([f_min_plot, f_max_plot])
     hold off
     
 end % iteration over shapes
@@ -79,6 +85,7 @@ scatter(fa_all(:,1),fa_all(:,2),dot_size,'filled','CData',dnl)
 xlabel('Frequency')
 ylabel('Amplitude')
 title('Degre of Non-Linearity')
+xlim([f_min_plot, f_max_plot])
 ylim([0 7])
 grid on
 set(gca,'xscale','log')
@@ -87,6 +94,7 @@ subplot(1,2,2)
 scatter(fa_all(lin_indexes,1),fa_all(lin_indexes,2),dot_size,'filled','CData',dof(lin_indexes))
 xlabel('Frequency')
 title('Degre of Filtering')
+xlim([f_min_plot, f_max_plot])
 ylim([0 7])
 grid on
 set(gca,'xscale','log')
