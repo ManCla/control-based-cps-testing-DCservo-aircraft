@@ -57,7 +57,7 @@ f_min = 0.005;         %  frequency range min
 f_max = 3;             % frequency range max
 freq_resolution = 0.1; % freq resolution to uniformly sample in test case generation
 amplitude_max = 20;    % ampliltude bound
-delta_amp = 0.3;       % amplitude resolution
+delta_amp = 0.5;       % amplitude resolution
 
 %% subdirectory name for given type of non-linearity
 
