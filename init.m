@@ -34,7 +34,7 @@ fnl_coulomb   = 2; % coulomb friction (static+linear)
 
 %% testing apporach parameters
 
-num_periods = 5;      % number of input periods included in test
+num_periods = 7;      % number of input periods included in test
 sampling_time = 0.05; % should be taken from SUT
 settle_time = 5;      % extra time in test for allowing for transients
 
