@@ -1,16 +1,16 @@
 %{
 Implement step 4 of apporach.
-We want to display:
- - fA plot with degre of non-linearity
- - fA plot with degre of non-linearity by shapes
+We display:
+ (Fig.1)   fA plot with non-linearity and filtering degree by shapes
+ (Fig.2)   fA plot with non-linearity and filtering degree
+ (Fig.3)   plot of degree of filtering over the frequencies
  - fA plot with ground truth of non-linear phenomena
- - fA plot with degre of filtering
- - plot of degree of filtering over the frequencies
-
+ 
 % For each fA point: [freq,amp,dnl,dof,nl_ground truth]
 
 %}
 
+clf(3)
 dot_size = 8; % size of dots in all scatter plot
 
 %% plot dnl and dof by shapes
@@ -43,6 +43,14 @@ for s_idx = 1:length(shapes)
     set(gca,'xscale','log')
     set(gca,'yscale','log')
 
+    figure(3)
+    subplot(length(shapes),1,s_idx)
+    grid on
+    hold on
+    plot([min(fa_points(lin_indexes,1)),max(fa_points(lin_indexes,1))],[0.5,0.5],'--r')
+    scatter(fa_points(lin_indexes,1),1-dof(lin_indexes),dot_size,'filled','black')
+    hold off
+    
 end % iteration over shapes
 
 figure(1)
@@ -54,6 +62,11 @@ subplot(length(shapes),2,2*length(shapes)-1)
 xlabel('Frequency')
 subplot(length(shapes),2,2*length(shapes))
 xlabel('Frequency')
+
+figure(3)
+xlabel('Frequency')
+subplot(length(shapes),1,1)
+title('Degree of filtering over frequencies')
 
 %% plot dnl and dof all shapes together
 lin_indexes = fa_all(:,3)<nl_threshold; % filter out points that show non linear behaviour
