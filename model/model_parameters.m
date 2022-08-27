@@ -27,7 +27,7 @@ deadband_width = 0.3;       % this is the WHOLE width size
 linear_friction = 0.12;
 quad_friction   = 0.03;
 coulomb_static  = 1;
-coulomb_linear  = 0.5;
+coulomb_linear  = 0.12;
 
 %% A/D and D/A parameters
 
