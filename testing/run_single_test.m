@@ -25,6 +25,7 @@ function test_results = run_single_test(test_file_path, num_periods, sampling_ti
             disp("--all tests will have wrong initialization.")
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        load("model/model_parameters.mat");
         options = simset('SrcWorkspace','current'); % use current scope instead of global
                                                     % one because Simulink by
                                                     % default uses that one...!?
