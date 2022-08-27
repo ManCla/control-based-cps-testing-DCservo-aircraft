@@ -1,17 +1,17 @@
-
-% NOTE: this is VERY IMPORTANT to reset static variables of C functions
-%       used by the C-Caller block.
-% NOTE: when simulink model is run via a script this is displayed to
-%       console: which is what you want.
-annoying_cache_file = 'slprj/_slcc/HUH6K2GxVF55s087k61dbD/HUH6K2GxVF55s087k61dbD_cclib.dylib';
-if isfile(annoying_cache_file)
-    delete(annoying_cache_file)
-else
-    disp("Cannot find annoying simulink cached file!")
-    disp("--Either this is a first simulation or it has changed name")
-    disp("--In the latter case YOU HAVE TO UPDATE ITS NAME or")
-    disp("--all tests will have wrong initialization.")
-end
+%% moved this to run_single_test function
+% % NOTE: this is VERY IMPORTANT to reset static variables of C functions
+% %       used by the C-Caller block.
+% % NOTE: when simulink model is run via a script this is displayed to
+% %       console: which is what you want.
+% annoying_cache_file = 'slprj/_slcc/HUH6K2GxVF55s087k61dbD/HUH6K2GxVF55s087k61dbD_cclib.dylib';
+% if isfile(annoying_cache_file)
+%     delete(annoying_cache_file)
+% else
+%     disp("Cannot find annoying simulink cached file!")
+%     disp("--Either this is a first simulation or it has changed name")
+%     disp("--In the latter case YOU HAVE TO UPDATE ITS NAME or")
+%     disp("--all tests will have wrong initialization.")
+% end
 
 %% sampling time of control loop
 % used in ZOH of reference generator and A/D converter
