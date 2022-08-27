@@ -25,8 +25,8 @@ function nld = non_linearity_degree(measurement,sampling_time,settle_time,main_f
     % actual dnl computation
     [v,i]=max(out_minor_components);
     nld = v/max(main_amps);
-    if i==1 && nld>0.15 % zero frequency check (mainly for curiosity at the moment)
-        disp('-- DNL COMPUTATION: zero frequency is determining an high dnl')
-    end
+%     if i==1 && nld>0.15 % zero frequency check (mainly for curiosity at the moment)
+%         disp('-- DNL COMPUTATION: zero frequency is determining an high dnl')
+%     end
 
 end
