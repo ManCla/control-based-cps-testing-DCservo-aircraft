@@ -13,26 +13,38 @@ rng(1)
 %% open ile containing sinusoidal based upperbound of nonlinear threshold
 nlth_file_path = sprintf("%s/nlth_upper_bound_fmin%g_fmax%g_damp%g_amax%g.csv", ...
                          directory,f_min,f_max,delta_amp,amplitude_max);
-nlth = readmatrix(nlth_file_path);
+nlth_upper_bound = readmatrix(nlth_file_path);
 
 %% test case generation for each shape
 
 % uniformly spaced sampling of frequencies
 freqs_vector    = f_min:freq_resolution:f_max;
-
+% test case with amp_scale=1 and time_scale=1 for amp and time scalings
+test_case.amplitude = 1;
+test_case.time_scaling = 1;
 % iterate over shapes
 for s_idx = 1:length(shapes)
     fprintf("Generating test set for shape %s\n",shapes(s_idx));
+    % get test with amp_scale=1 and time_scale=1 for scaling coeffs
+    test_case.shape = shapes(s_idx);
+    [reference, ~] = generate_input_sequence(test_case, num_periods, sampling_time, settle_time);
+    [ref_freq_peaks,ref_amp_peaks] = fA_main_components(reference(:,2), sampling_time, settle_time);
+    [fft_amp_scale, max_amp_idx] = max(ref_amp_peaks);
+    % fft_freq_scale 1 if shapes are defined over unit period and main component is lowest
+    fft_freq_scale = ref_freq_peaks(max_amp_idx);
+
     test_cases = []; % init test cases vector
     % iterate over frequencies
     for f_idx = 1:length(freqs_vector)
         freq = freqs_vector(f_idx);
-        a_max = get_nlth_at_freq(nlth,freq); % get amp[litude upper bound at given freq
+        % get amplitude upper bound at given freq in time domain
+        a_max = get_nlth_at_freq(nlth_upper_bound,freq)/fft_amp_scale;
+
         % random sampling with beta distribution of amplitudes
-        n_samples_at_freq = floor((a_max-delta_amp)/delta_amp)+1;
+        n_samples_at_freq = floor((a_max-delta_amp)/delta_amp);
         amps = delta_amp + (a_max-delta_amp)*(betarnd(5,0.8,[n_samples_at_freq,1]));
         % append to test cases vector
-        test_cases = [test_cases; freq*ones(n_samples_at_freq,1), amps]; %#ok<AGROW> 
+        test_cases = [test_cases; freq/fft_freq_scale*ones(n_samples_at_freq,1), amps]; %#ok<AGROW>
     end % frequencies loop
 
     % store test set for shape
@@ -46,38 +58,35 @@ end % shapes loop
 %%%%%                 plotting stuff used for debugging.              %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% plotting of test sets (short version: only frequency and amplitude scaling)
+%% plotting of test sets
 % iterate over shapes
 for s_idx = 1:length(shapes)
-    figure
-    test_cases = readmatrix(sprintf("%s%s-testset.csv",directory,shapes(s_idx)));
-    fprintf("I have %d tests with shape %s\n",length(test_cases(:,1)),shapes(s_idx));
-    scatter(test_cases(:,1),test_cases(:,2))
+    % open file with test cases
+    test_set_file_path = sprintf("%s%s-testset.csv",directory,shapes(s_idx));
+    test_cases = readmatrix(test_set_file_path);
+    % create figure object and plot nlth upperbound
+    figure(s_idx)
+    clf(s_idx)
+    hold on
+    % plot nlth upperbound
+    plot(nlth_upper_bound(:,1), nlth_upper_bound(:,2))
+    plot(nlth_upper_bound(:,1), nlth_upper_bound(:,3))
+    test_case.shape = shapes(s_idx);
+    frequencies = [];
+    amplitudes = [];
+    for tc_idx = 1:length(test_cases(:,1))
+        % test amplitude and time scaling
+        test_case.amplitude = test_cases(tc_idx,2);
+        test_case.time_scaling = test_cases(tc_idx,1); % assuming shape defined over unit period
+                                                       % and that main freq is lowest
+        [reference, test_duration] = generate_input_sequence(test_case, num_periods, sampling_time, settle_time);
+        [ref_freq_peaks,ref_amp_peaks] = fA_main_components(reference(:,2), sampling_time, settle_time);
+        frequencies = [frequencies, ref_freq_peaks]; %#ok<AGROW> 
+        amplitudes  = [amplitudes,  ref_amp_peaks ]; %#ok<AGROW> 
+    end
+    scatter(frequencies,amplitudes,8,'blue','filled')
     grid
-    title(sprintf("Test set generated for %s shape",shapes(s_idx)))
     set(gca,'xscale','log')
     set(gca,'yscale','log')
+    hold off
 end
-
-%% plotting of test sets (long version: all main components)
-% be aware that this takes some time
-% iterate over shapes
-% for s_idx = 1:length(shapes)
-% 
-%     figure
-%     hold on
-%     test_case.shape = shapes(s_idx);
-%     for tc_idx = 1:length(test_cases(:,1))
-%         % test amplitude and time scaling
-%         test_case.amplitude = test_cases(tc_idx,2);
-%         test_case.time_scaling = test_cases(tc_idx,1); % assuming shape defined over unit period
-%                                                        % and that main freq is lowest
-%         [reference, test_duration] = generate_input_sequence(test_case, num_periods, sampling_time, settle_time);
-%         [ref_freq_peaks,ref_amp_peaks] = fA_main_components(reference(:,2), sampling_time, settle_time);
-%         scatter(ref_freq_peaks,ref_amp_peaks)
-%     end
-%     grid
-%     set(gca,'xscale','log')
-%     set(gca,'yscale','log')
-%     hold off
-% end
