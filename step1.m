@@ -4,6 +4,10 @@ The step takes intial bounds on the frequency range of interest and the
 amplitude of the input. Those are then used to initialize a search over the
 frequencyes and amplitudes to get an upper bound for the non-linearity
 threshold based on sinusoidal inputs
+
+NOTE: amplutudes in the non-linear threshold upper bound are in the
+      frequency domain while amplitudes that will be used to define test
+      cases are amplitude scalings in the time domain
 %}
 
 %% init search - start with thresholds at f_min and f_max
