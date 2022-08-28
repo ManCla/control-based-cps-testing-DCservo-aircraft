@@ -9,6 +9,13 @@ function [amp_max, amp_min] = binary_search_sinusoidal(sut_nl, nl_threshold, num
     test_case.shape = 'sinus';
     test_case.time_scaling = frequency; % this assumes shapes are defined over 1 second
                                         % AND that main freq component is the lowest
+    % compute normalization coefficient of amplitude
+    test_case.amplitude = 1;
+    test_case.time_scaling = 1;
+    [reference, ~] = generate_input_sequence(test_case, num_periods, sampling_time, settle_time);
+    [~,ref_amp_peaks] = fA_main_components(reference(:,2), sampling_time, settle_time);
+    fft_amp_scale = 1/max(ref_amp_peaks);
+
     % init binary search
     lower = delta_amp;
     upper = amplitude_max;
@@ -28,6 +35,7 @@ function [amp_max, amp_min] = binary_search_sinusoidal(sut_nl, nl_threshold, num
         end
         amp = (upper+lower)/2;
     end
-    amp_max = upper;
-    amp_min = lower;
+    % normalize amplitude to make it usable across shapes
+    amp_max = upper/fft_amp_scale;
+    amp_min = lower/fft_amp_scale;
 end
