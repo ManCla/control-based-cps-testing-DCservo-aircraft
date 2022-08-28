@@ -5,16 +5,17 @@ non-linear threshold upper bound given by the sinusoidal inputs.
 
 function [amp_max, amp_min] = binary_search_sinusoidal(sut_nl, nl_threshold, num_periods,...
                            sampling_time, settle_time, frequency, delta_amp, amplitude_max, dir_params)
-    fprintf("Binary search along freqency %f\n",frequency);
     test_case.shape = 'sinus';
-    test_case.time_scaling = frequency; % this assumes shapes are defined over 1 second
-                                        % AND that main freq component is the lowest
     % compute normalization coefficient of amplitude
     test_case.amplitude = 1;
     test_case.time_scaling = 1;
     [reference, ~] = generate_input_sequence(test_case, num_periods, sampling_time, settle_time);
     [~,ref_amp_peaks] = fA_main_components(reference(:,2), sampling_time, settle_time);
     fft_amp_scale = 1/max(ref_amp_peaks);
+
+    fprintf("Binary search along frequency %f\n",frequency);
+    test_case.time_scaling = frequency; % this assumes shapes are defined over 1 second
+                                        % AND that main freq component is the lowest
 
     % init binary search
     lower = delta_amp;
