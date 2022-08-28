@@ -88,5 +88,7 @@ for s_idx = 1:length(shapes)
     grid
     set(gca,'xscale','log')
     set(gca,'yscale','log')
+    xlim([f_min, f_max*10])
+    ylim([delta_amp max(nlth_upper_bound(:,2))+1])
     hold off
 end

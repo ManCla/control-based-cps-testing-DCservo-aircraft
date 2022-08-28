@@ -42,4 +42,9 @@ figure
 hold on
 plot(nlth_upper_bound(:,1), nlth_upper_bound(:,2))
 plot(nlth_upper_bound(:,1), nlth_upper_bound(:,3))
+set(gca,'xscale','log')
+set(gca,'yscale','log')
+grid
+xlim([f_min, f_max])
+ylim([min(nlth_upper_bound(:,3))-1 max(nlth_upper_bound(:,2))+1])
 hold off
