@@ -15,6 +15,9 @@ dot_size = 8; % size of dots in all scatter plot
 f_min_plot = f_min;
 f_max_plot = 10;
 
+% use only largest fA component for dnl plots
+use_largest_fa_only = 0;
+
 %% open ile containing sinusoidal based upperbound of nonlinear threshold
 % this is used for  plotting the nlth as reference
 nlth_file_path = sprintf("%s/nlth_upper_bound_fmin%g_fmax%g_damp%g_amax%g.csv", ...
@@ -29,7 +32,11 @@ fa_all = []; % init variable to collect fA points for all shapes
 for s_idx = 1:length(shapes)
 
     % open file for storing the fA points for tests of given shape
-    fa_file_path = sprintf("%s%s-fa-points.csv",directory,shapes(s_idx));
+    if ~use_largest_fa_only % default to use all fA points
+        fa_file_path = sprintf("%s%s-fa-points.csv",directory,shapes(s_idx));
+    else
+        fa_file_path = sprintf("%s%s-fa-points-largest-only.csv",directory,shapes(s_idx));
+    end
     fa_points = readmatrix(fa_file_path);
     fa_all = [fa_all; fa_points]; %#ok<AGROW>
     lin_indexes = fa_points(:,3)<nl_threshold; % filter out points that show non linear behaviour
