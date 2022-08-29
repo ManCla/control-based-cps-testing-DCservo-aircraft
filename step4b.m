@@ -1,12 +1,12 @@
 %{
-Implement step 4 of apporach.
+Implement plotting part of step 4 of apporach.
 We display:
  (Fig.1)   fA plot with non-linearity and filtering degree by shapes
  (Fig.2)   fA plot with non-linearity and filtering degree
  (Fig.3)   plot of degree of filtering over the frequencies
  - fA plot with ground truth of non-linear phenomena
  
-% For each fA point: [freq,amp,dnl,dof,nl_ground truth]
+For each fA point: [freq,amp,dnl,dof, (TODO: nl_ground truth)]
 
 %}
 
@@ -22,14 +22,16 @@ fa_all = [];
 % iterate over shapes
 for s_idx = 1:length(shapes)
 
-    % open file for storing the fA points
+    % open file for storing the fA points for tests of given shape
     fa_file_path = sprintf("%s%s-fa-points.csv",directory,shapes(s_idx));
     fa_points = readmatrix(fa_file_path);
-    fa_all = [fa_all; fa_points];
+    fa_all = [fa_all; fa_points]; %#ok<AGROW>
     lin_indexes = fa_points(:,3)<nl_threshold; % filter out points that show non linear behaviour
-    dnl = 0.15-min(fa_points(:,3),nl_threshold);
+    % saturate dnl and dof
+    dnl = nl_threshold-min(fa_points(:,3),nl_threshold);
     dof = min(fa_points(:,4),1);
 
+    % figure by shapes
     figure(1)
     subplot(length(shapes),2,s_idx*2-1)
     scatter(fa_points(:,1),fa_points(:,2),dot_size,'filled','CData',dnl)
@@ -49,6 +51,7 @@ for s_idx = 1:length(shapes)
     set(gca,'xscale','log')
     set(gca,'yscale','log')
 
+    % degree of filtering over freuqnecies plot (by shape)
     figure(3)
     subplot(length(shapes),1,s_idx)
     grid on
@@ -60,6 +63,7 @@ for s_idx = 1:length(shapes)
     
 end % iteration over shapes
 
+% add titles and labels
 figure(1)
 subplot(length(shapes),2,1)
 title('Degre of Non-Linearity')
@@ -71,6 +75,7 @@ subplot(length(shapes),2,2*length(shapes))
 xlabel('Frequency')
 colormap('jet')
 
+% add titles and labels
 figure(3)
 xlabel('Frequency')
 subplot(length(shapes),1,1)
