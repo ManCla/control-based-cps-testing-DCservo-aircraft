@@ -22,8 +22,14 @@ for s_idx = 1:length(shapes)
     test_cases_of_shape = readmatrix(sprintf("%s%s-testset.csv",directory,shapes(s_idx)));
     num_tests_of_this_shape = length(test_cases_of_shape(:,1));
 
-    % open file for storing the fA points
+    % file for storing the fA points
+    % delete old one, normally would be overwritten but in append mode
+    % it is not. So deletion is relevant.
     fa_file_path = sprintf("%s%s-fa-points.csv",directory,shapes(s_idx));
+    delete(fa_file_path)
+    % file for storing the fA points - only main component
+    fa_file_path_largest = sprintf("%s%s-fa-points-largest-only.csv",directory,shapes(s_idx));
+    delete(fa_file_path_largest)
     fprintf("-- Analysing shape: %s\n",shapes(s_idx))
 
     % iterate over the tests
@@ -47,6 +53,13 @@ for s_idx = 1:length(shapes)
         % (iv)  if possible, compute "ground truth" of non-lienar behaviour
         % TODO: implement
         %%%% end analysis part %%%%
+
+        % store fA points
+        % only component with largest amplitude
+        [m,pt_idx]=max(ref_amp_peaks);
+        point_string = sprintf("%g, %g, %g, %g", ...
+                       ref_freq_peaks(pt_idx),ref_amp_peaks(pt_idx),dnl,dof(pt_idx));
+        writelines(point_string,fa_file_path_largest,WriteMode="append")
 
         % store fA points
         % iterate over main fa components
