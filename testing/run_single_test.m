@@ -30,7 +30,8 @@ function test_results = run_single_test(test_file_path, num_periods, sampling_ti
                                                     % one because Simulink by
                                                     % default uses that one...!?
         sim_output = sim('DCservo.slx',[],options); % call simulink model
-        test_results = [sim_output.data.time, sim_output.data.data]; % output traces extraction
+        % output traces extraction
+        test_results = [sim_output.data.time, sim_output.data.data, sim_output.nl_measured.data];
         writematrix(test_results,test_file_path) % store test rresults in csv file
     else
         disp('-- Test already executed!')
