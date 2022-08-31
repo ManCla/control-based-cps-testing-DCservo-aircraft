@@ -16,7 +16,7 @@ f_min_plot = f_min;
 f_max_plot = 10;
 
 % use only largest fA component for dnl plots
-use_largest_fa_only = 0;
+use_largest_fa_only = 1;
 
 %% open ile containing sinusoidal based upperbound of nonlinear threshold
 % this is used for  plotting the nlth as reference
