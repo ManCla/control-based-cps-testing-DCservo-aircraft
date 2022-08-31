@@ -32,11 +32,14 @@ disp(dof)
 
 % time domain plotting
 figure(2)
-plot(test_results(:,1),test_results(:,2:end)),grid
+plot(test_results(:,1),test_results(:,2:4)),grid
 legend('reference', 'output', 'actuation')
+figure(3)
+plot(test_results(:,1),test_results(:,5:6)),grid
+legend('input measured non linearity', 'friction measured non linearity')
 
 % frequency domain plotting
-figure(3)
+figure(4)
 clf
 hold on
 % just for plotting purposes otherwise zero frequency does not show up in
