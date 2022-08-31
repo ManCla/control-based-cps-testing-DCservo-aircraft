@@ -19,6 +19,14 @@ test_results = readmatrix(target_file_path);
 % main components
 [ref_freq_peaks,ref_amp_peaks] = fA_main_components(test_results(:,2), sampling_time, settle_time);
 [out_freq_peaks,out_amp_peaks] = fA_main_components(test_results(:,3), sampling_time, settle_time);
+% compute actuator saturation time
+sat_perc = saturation_percentage(test_results(:,4));
+disp("Percentage of time that actuator is saturated: ")
+disp(sat_perc)
+% compute actuator saturation time
+sensor_sat_perc = saturation_percentage(test_results(:,3));
+disp("Percentage of time that sensor is saturated: ")
+disp(sensor_sat_perc)
 % compute degree of non-linearity
 dnl = non_linearity_degree(test_results(:,3),sampling_time,settle_time,ref_freq_peaks,ref_amp_peaks);
 disp("Non-Linearity degree is: ")
