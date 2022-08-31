@@ -65,8 +65,9 @@ for s_idx = 1:length(shapes)
     test_set_file_path = sprintf("%s%s-testset.csv",directory,shapes(s_idx));
     test_cases = readmatrix(test_set_file_path);
     % create figure object and plot nlth upperbound
-    figure(s_idx)
-    clf(s_idx)
+    fig_num=20+s_idx;
+    figure(fig_num)
+    clf(fig_num)
     hold on
     % plot nlth upperbound
     plot(nlth_upper_bound(:,1), nlth_upper_bound(:,2))
