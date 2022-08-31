@@ -41,7 +41,7 @@ for s_idx = 1:length(shapes)
     fa_all = [fa_all; fa_points]; %#ok<AGROW>
     lin_indexes = fa_points(:,3)<nl_threshold; % filter out points that show non linear behaviour
     % saturate dnl and dof
-    dnl = nl_threshold-min(fa_points(:,3),nl_threshold);
+    dnl = min(fa_points(:,3),nl_threshold);
     dof = min(fa_points(:,4),1);
 
     % figure by shapes
@@ -76,7 +76,7 @@ end % iteration over shapes
 
 %% plot dnl and dof all shapes together
 lin_indexes_all = fa_all(:,3)<nl_threshold; % filter out points that show non linear behaviour
-dnl_all = nl_threshold-min(fa_all(:,3),nl_threshold);
+dnl_all = min(fa_all(:,3),nl_threshold);
 dof_all = min(fa_all(:,4),1);
 
 % dnl plot for all shapes on right-hand side of figure
