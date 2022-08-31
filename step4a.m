@@ -51,22 +51,27 @@ for s_idx = 1:length(shapes)
         % (iii) compute filtering degree
         dof = filtering_degree(test_results(:,3),sampling_time,settle_time,ref_freq_peaks,ref_amp_peaks);
         % (iv)  if possible, compute "ground truth" of non-lienar behaviour
-        % TODO: implement
+        sat_actuation_perc = saturation_percentage(test_results(:,4));
+        sat_sensor_perc    = saturation_percentage(test_results(:,3));
+        input_nl_avg    = mean(test_results(:,5));
+        friction_nl_avg = mean(test_results(:,6));
         %%%% end analysis part %%%%
 
         % store fA points
         % only component with largest amplitude
         [m,pt_idx]=max(ref_amp_peaks);
-        point_string = sprintf("%g, %g, %g, %g", ...
-                       ref_freq_peaks(pt_idx),ref_amp_peaks(pt_idx),dnl,dof(pt_idx));
+        point_string = sprintf("%g, %g, %g, %g, %g, %g, %g, %g", ...
+                       ref_freq_peaks(pt_idx),ref_amp_peaks(pt_idx),dnl,dof(pt_idx)...
+                       sat_actuation_perc, sat_sensor_perc, input_nl_avgf,friction_nl_avg);
         writelines(point_string,fa_file_path_largest,WriteMode="append")
 
         % store fA points
         % iterate over main fa components
         for pt_idx = 1:length(ref_freq_peaks)
             % freq,amp,dnl,dof
-            point_string = sprintf("%g, %g, %g, %g", ...
-                           ref_freq_peaks(pt_idx),ref_amp_peaks(pt_idx),dnl,dof(pt_idx));
+            point_string = sprintf("%g, %g, %g, %g, %g, %g, %g, %g", ...
+                           ref_freq_peaks(pt_idx),ref_amp_peaks(pt_idx),dnl,dof(pt_idx)...
+                           sat_actuation_perc, sat_sensor_perc, input_nl_avgf,friction_nl_avg);
             writelines(point_string,fa_file_path,WriteMode="append")
         end % iteration over main fa components
 
