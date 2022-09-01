@@ -53,8 +53,10 @@ for s_idx = 1:length(shapes)
         % (iv)  if possible, compute "ground truth" of non-lienar behaviour
         sat_actuation_perc = saturation_percentage(test_results(:,4));
         sat_sensor_perc    = saturation_percentage(test_results(:,3));
-        input_nl_avg    = mean(test_results(:,5));
-        friction_nl_avg = mean(test_results(:,6));
+        % NOTE: we are skipping index 5 because the simulink exit at that
+        % index is empty because of a refuso
+        input_nl_avg    = mean(test_results(:,6));
+        friction_nl_avg = mean(test_results(:,7));
         %%%% end analysis part %%%%
 
         % store fA points
