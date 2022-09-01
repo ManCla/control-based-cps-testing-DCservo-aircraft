@@ -61,8 +61,8 @@ for s_idx = 1:length(shapes)
         % only component with largest amplitude
         [m,pt_idx]=max(ref_amp_peaks);
         point_string = sprintf("%g, %g, %g, %g, %g, %g, %g, %g", ...
-                       ref_freq_peaks(pt_idx),ref_amp_peaks(pt_idx),dnl,dof(pt_idx)...
-                       sat_actuation_perc, sat_sensor_perc, input_nl_avgf,friction_nl_avg);
+                       ref_freq_peaks(pt_idx),ref_amp_peaks(pt_idx),dnl,dof(pt_idx),...
+                       sat_actuation_perc, sat_sensor_perc, input_nl_avg,friction_nl_avg);
         writelines(point_string,fa_file_path_largest,WriteMode="append")
 
         % store fA points
@@ -70,8 +70,8 @@ for s_idx = 1:length(shapes)
         for pt_idx = 1:length(ref_freq_peaks)
             % freq,amp,dnl,dof
             point_string = sprintf("%g, %g, %g, %g, %g, %g, %g, %g", ...
-                           ref_freq_peaks(pt_idx),ref_amp_peaks(pt_idx),dnl,dof(pt_idx)...
-                           sat_actuation_perc, sat_sensor_perc, input_nl_avgf,friction_nl_avg);
+                           ref_freq_peaks(pt_idx),ref_amp_peaks(pt_idx),dnl,dof(pt_idx),...
+                           sat_actuation_perc, sat_sensor_perc, input_nl_avg,friction_nl_avg);
             writelines(point_string,fa_file_path,WriteMode="append")
         end % iteration over main fa components
 
