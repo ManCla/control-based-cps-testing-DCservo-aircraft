@@ -108,6 +108,22 @@ set(gca,'xscale','log')
 set(gca,'yscale','log')
 colormap('jet')
 
+figure(2)
+hold on
+scatter(fa_all(lin_indexes_all,1),fa_all(lin_indexes_all,2),dot_size,'filled','CData',dof_all(lin_indexes_all))
+plot(nlth_upper_bound(:,1), nlth_upper_bound(:,2))
+plot(nlth_upper_bound(:,1), nlth_upper_bound(:,3))
+hold off
+colorbar
+xlabel('Frequency')
+title('Degree of Filtering: all shapes together')
+xlim([f_min_plot, f_max_plot])
+ylim([0 7])
+grid on
+set(gca,'xscale','log')
+set(gca,'yscale','log')
+colormap('jet')
+
 % dnl plot for all shapes on right-hand side of figure
 figure(5)
 subplot(1,4,1) % plot actuator saturation
@@ -177,23 +193,6 @@ ylabel('Amplitude')
 xlim([f_min_plot, f_max_plot])
 ylim([0 7])
 clim([0,nl_threshold])
-grid on
-set(gca,'xscale','log')
-set(gca,'yscale','log')
-colormap('jet')
-
-
-figure(2)
-hold on
-scatter(fa_all(lin_indexes_all,1),fa_all(lin_indexes_all,2),dot_size,'filled','CData',dof_all(lin_indexes_all))
-plot(nlth_upper_bound(:,1), nlth_upper_bound(:,2))
-plot(nlth_upper_bound(:,1), nlth_upper_bound(:,3))
-hold off
-colorbar
-xlabel('Frequency')
-title('Degree of Filtering: all shapes together')
-xlim([f_min_plot, f_max_plot])
-ylim([0 7])
 grid on
 set(gca,'xscale','log')
 set(gca,'yscale','log')
