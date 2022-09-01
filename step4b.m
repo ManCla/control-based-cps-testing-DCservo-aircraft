@@ -6,12 +6,12 @@ We display:
  (Fig.3)   plot of degree of filtering over the frequencies
  - fA plot with ground truth of non-linear phenomena
  
-For each fA point: [freq,amp,dnl,dof, (TODO: nl_ground truth)]
+For each fA point: [freq,amp,dnl,dof,sat_actuation_perc,sat_sensor_perc,input_nl_avg,friction_nl_avg]
 
 %}
 
 %% some plotting parameters
-dot_size = 8; % size of dots in all scatter plot
+dot_size = 6; % size of dots in all scatter plot
 f_min_plot = f_min;
 f_max_plot = 10;
 
