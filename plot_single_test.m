@@ -43,7 +43,7 @@ figure(2)
 plot(test_results(:,1),test_results(:,2:4)),grid
 legend('reference', 'output', 'actuation')
 figure(3)
-plot(test_results(:,1),test_results(:,5:6)),grid
+plot(test_results(:,1),test_results(:,5:7)),grid
 legend('input measured non linearity', 'friction measured non linearity')
 
 % frequency domain plotting
