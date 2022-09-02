@@ -30,6 +30,10 @@ for s_idx = 1:length(shapes)
     % file for storing the fA points - only main component
     fa_file_path_largest = sprintf("%s%s-fa-points-largest-only.csv",directory,shapes(s_idx));
     delete(fa_file_path_largest)
+    % file for storing the fA points - only tests with liner behaviour
+    fa_file_path_linear = sprintf("%s%s-fa-points-linear-only.csv",directory,shapes(s_idx));
+    delete(fa_file_path_linear)
+
     fprintf("-- Analysing shape: %s\n",shapes(s_idx))
 
     % iterate over the tests
@@ -67,7 +71,7 @@ for s_idx = 1:length(shapes)
                        sat_actuation_perc, sat_sensor_perc, input_nl_avg,friction_nl_avg);
         writelines(point_string,fa_file_path_largest,WriteMode="append")
 
-        % store fA points
+        % storing of all points
         % iterate over main fa components
         for pt_idx = 1:length(ref_freq_peaks)
             % freq,amp,dnl,dof
@@ -77,6 +81,17 @@ for s_idx = 1:length(shapes)
             writelines(point_string,fa_file_path,WriteMode="append")
         end % iteration over main fa components
 
+        % storing of points associated to tests with linear behaviour
+        % iterate over main fa components
+        if dnl<nl_threshold
+            for pt_idx = 1:length(ref_freq_peaks)
+                % freq,amp,dnl,dof
+                point_string = sprintf("%g, %g, %g, %g, %g, %g, %g, %g", ...
+                               ref_freq_peaks(pt_idx),ref_amp_peaks(pt_idx),dnl,dof(pt_idx),...
+                               sat_actuation_perc, sat_sensor_perc, input_nl_avg,friction_nl_avg);
+                writelines(point_string,fa_file_path_linear,WriteMode="append")
+            end % iteration over main fa components
+        end
     end % iteration over test cases
 end % iteration over shapes
 
