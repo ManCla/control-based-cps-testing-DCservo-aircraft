@@ -13,7 +13,9 @@ For each fA point: [freq,amp,dnl,dof,sat_actuation_perc,sat_sensor_perc,input_nl
 %% some plotting parameters
 dot_size = 8; % size of dots in all scatter plot
 f_min_plot = f_min;
-f_max_plot = 10;
+f_max_plot = 3.1;
+amp_max_plot = 5;
+amp_min_plot = 0.5;
 
 % use only largest fA component for dnl plots
 use_largest_fa_only = 1;
@@ -56,7 +58,7 @@ for s_idx = 1:length(shapes)
     title(shapes(s_idx))
     ylabel('Amplitude')
     xlim([f_min_plot, f_max_plot])
-    ylim([0 7])
+    ylim([amp_min_plot amp_max_plot])
     clim([0,nl_threshold])
     grid on
     set(gca,'xscale','log')
@@ -101,7 +103,7 @@ title('Degree of Non-Linearity: all shapes together')
 xlabel('Frequency')
 ylabel('Amplitude')
 xlim([f_min_plot, f_max_plot])
-ylim([0 7])
+ylim([amp_min_plot amp_max_plot])
 clim([0,nl_threshold])
 grid on
 set(gca,'xscale','log')
@@ -118,7 +120,7 @@ colorbar
 xlabel('Frequency')
 title('Degree of Filtering: all shapes together')
 xlim([f_min_plot, f_max_plot])
-ylim([0 7])
+ylim([amp_min_plot amp_max_plot])
 grid on
 set(gca,'xscale','log')
 set(gca,'yscale','log')
@@ -137,7 +139,7 @@ colorbar
 xlabel('Frequency')
 ylabel('Amplitude')
 xlim([f_min_plot, f_max_plot])
-ylim([0 7])
+ylim([amp_min_plot amp_max_plot])
 % clim([0,nl_threshold])
 grid on
 set(gca,'xscale','log')
@@ -155,7 +157,7 @@ colorbar
 xlabel('Frequency')
 ylabel('Amplitude')
 xlim([f_min_plot, f_max_plot])
-ylim([0 7])
+ylim([amp_min_plot amp_max_plot])
 % clim([0,nl_threshold])
 grid on
 set(gca,'xscale','log')
@@ -173,7 +175,7 @@ colorbar
 xlabel('Frequency')
 ylabel('Amplitude')
 xlim([f_min_plot, f_max_plot])
-ylim([0 7])
+ylim([amp_min_plot amp_max_plot])
 % clim([0,nl_threshold])
 grid on
 set(gca,'xscale','log')
@@ -191,7 +193,7 @@ colorbar
 xlabel('Frequency')
 ylabel('Amplitude')
 xlim([f_min_plot, f_max_plot])
-ylim([0 7])
+ylim([amp_min_plot amp_max_plot])
 % clim([0,nl_threshold])
 grid on
 set(gca,'xscale','log')
