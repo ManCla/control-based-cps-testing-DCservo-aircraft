@@ -16,6 +16,12 @@ For each fA point: [freq,amp,dnl,dof, (TODO: nl_ground truth)]
 
 fprintf("I am now analysing test data for SUT:\n%s\n",directory)
 
+% saturate dnl and dof: convenient for plotting in latex
+saturate_dnl_dof = 0;
+if saturate_dnl_dof
+    fprintf('-- I will saturate dnl and dof (to %g and 1) and invert the dof\n',nl_threshold)
+end
+
 % iterate over shapes
 for s_idx = 1:length(shapes)
     % get test set from file
@@ -61,6 +67,10 @@ for s_idx = 1:length(shapes)
         % index is empty because of a refuso
         input_nl_avg    = mean(abs(test_results(:,6)));
         friction_nl_avg = mean(abs(test_results(:,7)));
+        if saturate_dnl_dof
+            dnl = min(dnl,nl_threshold);
+            dof = 1-min(dof,1);
+        end
         %%%% end analysis part %%%%
 
         % store fA points
