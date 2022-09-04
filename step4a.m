@@ -17,7 +17,7 @@ For each fA point: [freq,amp,dnl,dof, (TODO: nl_ground truth)]
 fprintf("I am now analysing test data for SUT:\n%s\n",directory)
 
 % saturate dnl and dof: convenient for plotting in latex
-saturate_dnl_dof = 0;
+saturate_dnl_dof = 1;
 if saturate_dnl_dof
     fprintf('-- I will saturate dnl and dof (to %g and 1) and invert the dof\n',nl_threshold)
 end
