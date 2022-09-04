@@ -8,7 +8,7 @@ function percentage = saturation_percentage(signal)
     % Function parameters: saturation bounds
     actuation_min = -10;
     actuation_max = 10;
-    resolution = 0.01;
+    resolution = 0.03;
 
     samples_number = length(signal);
     min_sat_samples = sum(signal<actuation_min+resolution);
