@@ -22,12 +22,12 @@ The main directory contains different scripts
 
 To execute the testing campaing execute the following commands from the matlab shell:
 
- * Run _init.m_ to initialise the testing process. Most importantly, change lines 46 and 47 to select the non-linearites to be included in the DC servo model.
- * Run _step1.m_ to execute the search to retrieve the upper bound of the amplitude values.
- * Run _step2.m_ to use the amplitude upper bound to generate the test set.
- * Run _step3a.m_ to execute the obtained test set.
- * Run _step3b.m_ to analyse the test output (obtain frequency-amplitude points, degree of non linearity, degree of filtering, and non-linear behavoiure ground truth).
- * Run _step3c.m_ plot the analysis resutls.
+ * Run ```init``` to initialise the testing process. Most importantly, change lines 46 and 47 to select the non-linearites to be included in the DC servo model.
+ * Run ```step1``` to execute the search to retrieve the upper bound of the amplitude values.
+ * Run ```step2``` to use the amplitude upper bound to generate the test set.
+ * Run ```step3a``` to execute the obtained test set.
+ * Run ```step3b``` to analyse the test output (obtain frequency-amplitude points, degree of non linearity, degree of filtering, and non-linear behavoiure ground truth).
+ * Run ```step3c``` plot the analysis resutls.
 
 Each step provides its output in the form of csv files.
 Those files are stored in the folder _dcServo_test_data_\*7periods_ where the \* is the number of periods executed in the tests (__note:__ this folder needs to be manually created).
