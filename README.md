@@ -12,15 +12,27 @@ The repository contains the following sub directories:
 
 The main directory contains different scripts
 
- * _init.m: it initializes relevant variables (paths, data directories names, non-linear phenomena selection, testing apporach parameters)
+ * _init.m_: it initializes relevant variables (paths, data directories names, non-linear phenomena selection, testing apporach parameters)
  * _run\_once_: executes a single test (given shape, amplitude scaling and time scaling)
  * _plot\_single\_test.m_: plots the output of a single test
  * _step\*.m_: implement the different steps of the apporach
+ * _preliminary\_eval\_num\_periods.m_: performs the preliminary evaluation used to evaluate the number of periods needed for the computation of the __dnl__ metric
 
 ## Execution of Testing Campaign
 
 To execute the testing campaing execute the following commands from the matlab shell:
 
- * Run *init.m* to initialise the testing process. Most importantly, change lines 46 and 47 to select the non-linearites to be included in the DC servo model.
- * 
- * 
+ * Run _init.m_ to initialise the testing process. Most importantly, change lines 46 and 47 to select the non-linearites to be included in the DC servo model.
+ * Run _step1.m_ to execute the search to retrieve the upper bound of the amplitude values.
+ * Run _step2.m_ to use the amplitude upper bound to generate the test set.
+ * Run _step3a.m_ to execute the obtained test set.
+ * Run _step3b.m_ to analyse the test output (obtain frequency-amplitude points, degree of non linearity, degree of filtering, and non-linear behavoiure ground truth).
+ * Run _step3c.m_ plot the analysis resutls.
+
+Each step provides its output in the form of csv files.
+Those files are stored in the folder _dcServo_test_data_\*7periods_ where the \* is the number of periods executed in the tests (__note:__ this folder needs to be manually created).
+The folder contains separated subfolders for each  version of the DC servo (defined by the different non-linearities included).
+
+
+
+
