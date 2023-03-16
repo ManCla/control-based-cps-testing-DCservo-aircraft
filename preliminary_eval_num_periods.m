@@ -21,7 +21,7 @@ target_file_path = printf_test_file_path(sut_nl, test_case, dir_params);
 % remove file of test to make sure that it is re-run
 fprintf("I am going to delete file %s\n", target_file_path)
 delete(target_file_path)
-test_results = run_single_test(target_file_path, num_periods, sampling_time, settle_time, dir_params);
+test_results = feval(dir_params.run_single_test_fcn,target_file_path, num_periods, sampling_time, settle_time, dir_params);
 
 %% analyse
 % iterate over number of available periods and analyse for each of them

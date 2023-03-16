@@ -21,7 +21,7 @@ for s_idx = 1:length(shapes)
                  test_case.amplitude, test_case.time_scaling);
         target_file_path = printf_test_file_path(sut_nl, test_case, dir_params);
         % run test case
-        test_results = run_single_test(target_file_path, num_periods, sampling_time, settle_time, dir_params);
+        test_results = feval(dir_params.run_single_test_fcn, target_file_path, num_periods, sampling_time, settle_time, dir_params);
 
     end % test cases loop
 end % shapes loop

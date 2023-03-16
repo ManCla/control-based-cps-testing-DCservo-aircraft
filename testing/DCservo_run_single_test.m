@@ -2,7 +2,7 @@
 function to run a given test
 %}
 
-function test_results = run_single_test(test_file_path, num_periods, sampling_time, settle_time,dir_params)
+function test_results = DCservo_run_single_test(test_file_path, num_periods, sampling_time, settle_time,dir_params)
 
     if ~isfile(test_file_path) % run test only if it has not been already executed
         % extract test parameters used to define input
@@ -25,7 +25,7 @@ function test_results = run_single_test(test_file_path, num_periods, sampling_ti
             disp("--all tests will have wrong initialization.")
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        load("model/model_parameters.mat");
+        load("models/DCservo/model_parameters.mat");
         options = simset('SrcWorkspace','current'); % use current scope instead of global
                                                     % one because Simulink by
                                                     % default uses that one...!?

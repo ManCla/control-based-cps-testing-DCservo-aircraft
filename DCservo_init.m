@@ -14,8 +14,8 @@ It initializes:
 
 %% initialize paths
 
-addpath('model') % path containig the simulink model
-addpath('testing') % paths for implementation of testing approach
+addpath('models/DCservo/')  % path containig the simulink model
+addpath('testing')          % paths for implementation of testing approach
 addpath('testing/analysis')
 addpath('testing/utils')
 addpath('testing/approach/')
@@ -68,7 +68,12 @@ dir_params.data_directory = sprintf('dcServo_test_data_%dperiods',num_periods);
 % used also (only?) for directory generation
 dir_params.inl_names = ["inl_none", "inl_dead_zone", "inl_backlash"];
 dir_params.fnl_names = ["fnl_linear", "fnl_quadratic", "fnl_coulomb"];
-
+% Name of Function to execute one test
+% while this seems totally unnecessary, it is due to the mess that Simulink
+% does when executing C code that forced us to implement a custom
+% run_single_test function for the DC servo (and hence for each case of
+% study)
+dir_params.run_single_test_fcn = 'DCservo_run_single_test';
 
 directory = sprintf('%s/%s-%s/',dir_params.data_directory, ...
                                 dir_params.inl_names(sut_nl.input_non_linearity+1), ...

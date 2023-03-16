@@ -25,7 +25,7 @@ function [amp_max, amp_min] = binary_search_sinusoidal(sut_nl, nl_threshold, num
         test_case.amplitude = amp;
         target_file_path = printf_test_file_path(sut_nl, test_case, dir_params);
         fprintf("I am now executing test %s\n",target_file_path);
-        test_results = run_single_test(target_file_path, num_periods, sampling_time, settle_time, dir_params);
+        test_results = feval(dir_params.run_single_test_fcn, target_file_path, num_periods, sampling_time, settle_time, dir_params);
         writematrix(test_results,target_file_path); % store results
         [ref_freq_peaks,ref_amp_peaks] = fA_main_components(test_results(:,2), sampling_time, settle_time);
         dnl = non_linearity_degree(test_results(:,3),sampling_time,settle_time,ref_freq_peaks,ref_amp_peaks);
