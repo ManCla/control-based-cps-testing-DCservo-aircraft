@@ -1,6 +1,6 @@
 # simulink ignore
 *.slxc
-*slprj/*
+**/slprj/*
 *.asv
 *.autosave
 dcServo_test_data*
