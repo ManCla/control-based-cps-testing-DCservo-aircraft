@@ -19,14 +19,25 @@ test_results = readmatrix(target_file_path);
 % main components
 [ref_freq_peaks,ref_amp_peaks] = fA_main_components(test_results(:,2), sampling_time, settle_time);
 [out_freq_peaks,out_amp_peaks] = fA_main_components(test_results(:,3), sampling_time, settle_time);
-% compute actuator saturation time
-sat_perc = saturation_percentage(test_results(:,4));
-disp("Percentage of time that actuator is saturated: ")
-disp(sat_perc)
-% compute actuator saturation time
-sensor_sat_perc = saturation_percentage(test_results(:,3));
-disp("Percentage of time that sensor is saturated: ")
-disp(sensor_sat_perc)
+
+% if saturation time quantification is available (as of now, only for the
+% DC servo), plot it. NOTE: this assumes that the number of elements logged
+% is smaller than the number of time samples (when using the min function).
+if min(size(test_results))>4
+    % compute actuator saturation time
+    % NOTE: this uses hardcoded saturation bounds because we use it only for
+    % the DCservo as of now
+    sat_perc = saturation_percentage(test_results(:,4));
+    disp("Percentage of time that actuator is saturated: ")
+    disp(sat_perc)
+    % compute actuator saturation time
+    % NOTE: this uses hardcoded saturation bounds because we use it only for
+    % the DCservo as of now
+    sensor_sat_perc = saturation_percentage(test_results(:,3));
+    disp("Percentage of time that sensor is saturated: ")
+    disp(sensor_sat_perc)
+end
+
 % compute degree of non-linearity
 dnl = non_linearity_degree(test_results(:,3),sampling_time,settle_time,ref_freq_peaks,ref_amp_peaks);
 disp("Non-Linearity degree is: ")
@@ -42,9 +53,14 @@ disp(dof)
 figure(2)
 plot(test_results(:,1),test_results(:,2:4)),grid
 legend('reference', 'output', 'actuation')
-figure(3)
-plot(test_results(:,1),test_results(:,5:7)),grid
-legend('input measured non linearity', 'friction measured non linearity')
+% if nl phenomena quantification is available (as of now, only for the DC 
+% servo), plot it. NOTE: this assumes that the number of elements logged is
+% smaller than the number of time samples (when using the min function).
+if min(size(test_results))>4
+    figure(3)
+    plot(test_results(:,1),test_results(:,5:7)),grid
+    legend('input measured non linearity', 'friction measured non linearity')
+end
 
 % frequency domain plotting
 figure(4)
