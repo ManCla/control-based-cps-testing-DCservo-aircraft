@@ -68,11 +68,11 @@ clf
 hold on
 % just for plotting purposes otherwise zero frequency does not show up in
 % logarithmic scale
-ref_freqs(1) = 0.001;
-out_freqs(1) = 0.001;
+ref_freqs(1) = 0.0001;
+out_freqs(1) = 0.0001;
 if ref_freq_peaks(1)==0
-    ref_freq_peaks(1) = 0.001;
-    out_freq_peaks(1) = 0.001;
+    ref_freq_peaks(1) = 0.0001;
+    out_freq_peaks(1) = 0.0001;
 end
 % scatter plot full spectra
 scatter(ref_freqs,ref_amps,5,'blue','o')
