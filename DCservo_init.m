@@ -32,6 +32,11 @@ fnl_linear    = 0; % linear friction
 fnl_quadratic = 1; % quadratic friction
 fnl_coulomb   = 2; % coulomb friction (static+linear)
 
+%% test case for preliminary evaluation
+preliminary_test_case_shape = 'steps';
+preliminary_test_case_amplitude = 20;
+preliminary_test_case_time_scaling = 3;
+
 %% testing apporach parameters
 
 num_periods = 7;      % number of input periods included in test

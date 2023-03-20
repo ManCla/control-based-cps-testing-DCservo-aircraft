@@ -12,9 +12,9 @@ num_periods = 10;      % number of input periods to evaluate (should be large)
 % we just need one test case that fails. The system seems to be robust to
 % non-linearities within the prescribed range for sinusoidal inputs so we
 % use steps instead.
-test_case.shape = 'steps';
-test_case.amplitude = 20;
-test_case.time_scaling = 3;
+test_case.shape        = preliminary_test_case_shape;
+test_case.amplitude    = preliminary_test_case_amplitude;
+test_case.time_scaling = preliminary_test_case_time_scaling;
 
 %% test execution
 target_file_path = printf_test_file_path(sut_nl, test_case, dir_params);
