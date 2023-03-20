@@ -32,6 +32,11 @@ addpath('testing/approach/')
 inl_as_model = 0; %
 fnl_as_model = 0; %
 
+%% test case for preliminary evaluation
+preliminary_test_case_shape = 'steps';
+preliminary_test_case_amplitude = 200;
+preliminary_test_case_time_scaling = 0.5;
+
 %% testing apporach parameters
 
 num_periods = 7;       % number of input periods included in test
