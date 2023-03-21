@@ -24,10 +24,10 @@ nlth_upper_bound = [nlth_upper_bound;
 %% iterative exploration
 % iterate until we get desired resolution along amplitude axis for
 % upperbound of nonlinear threshold
-next_freq = sample_frequency(nlth_upper_bound, delta_amp);
+next_freq = sample_frequency(nlth_upper_bound, delta_amp, freq_resolution);
 while next_freq
     [amp_max, amp_min] = binary_search_sinusoidal(sut_nl, nl_threshold, num_periods, sampling_time, settle_time, ...
-                                                  next_freq, delta_amp, amplitude_max, dir_params);
+                                                  next_freq, delta_amp, amplitude_max, dir_params, exclude_zeroHz_in_normalization);
     for i=2:size(nlth_upper_bound,1)
         if next_freq<nlth_upper_bound(i,1)
             % add in matrix of upper bounds
@@ -37,6 +37,7 @@ while next_freq
             break
         end
     end
+    next_freq = sample_frequency(nlth_upper_bound, delta_amp, freq_resolution);
 end
 
 nlth_file_path = sprintf("%s/nlth_upper_bound_fmin%g_fmax%g_damp%g_amax%g.csv", ...
