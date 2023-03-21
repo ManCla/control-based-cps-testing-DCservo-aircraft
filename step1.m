@@ -28,9 +28,15 @@ next_freq = sample_frequency(nlth_upper_bound, delta_amp);
 while next_freq
     [amp_max, amp_min] = binary_search_sinusoidal(sut_nl, nl_threshold, num_periods, sampling_time, settle_time, ...
                                                   next_freq, delta_amp, amplitude_max, dir_params);
-    nlth_upper_bound = [nlth_upper_bound;
-                        next_freq, amp_max, amp_min]; % add to matrix of upper bounds
-    next_freq = sample_frequency(nlth_upper_bound, delta_amp)
+    for i=2:size(nlth_upper_bound,1)
+        if next_freq<nlth_upper_bound(i,1)
+            % add in matrix of upper bounds
+            nlth_upper_bound = [nlth_upper_bound(1:i-1,:);
+                                next_freq, amp_max, amp_min;
+                                nlth_upper_bound(i:end,:);];
+            break
+        end
+    end
 end
 
 nlth_file_path = sprintf("%s/nlth_upper_bound_fmin%g_fmax%g_damp%g_amax%g.csv", ...
