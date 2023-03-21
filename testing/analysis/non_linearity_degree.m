@@ -15,7 +15,8 @@ OUTPUTS:
                       the frequencies of the main components of the input
 %}
 
-function nld = non_linearity_degree(measurement,sampling_time,settle_time,main_freqs,main_amps)
+function nld = non_linearity_degree(measurement,sampling_time,settle_time,main_freqs,main_amps,...
+                                    exclude_zeroHz_in_normalization)
 
     to_analyse = measurement(settle_time/sampling_time:end); % exclude settling
     [out_freqs,out_amps] = fourier_transform_wrap(to_analyse, sampling_time); % compute fft of measurements
@@ -24,7 +25,11 @@ function nld = non_linearity_degree(measurement,sampling_time,settle_time,main_f
     out_minor_components = out_amps(~main_indexes);
     % actual dnl computation
     [v,i]=max(out_minor_components);
-    nld = v/max(main_amps);
+    if exclude_zeroHz_in_normalization
+        nld = v/max(main_amps(2:end));
+    else
+        nld = v/max(main_amps);
+    end
 %     if i==1 && nld>0.15 % zero frequency check (mainly for curiosity at the moment)
 %         disp('-- DNL COMPUTATION: zero frequency is determining an high dnl')
 %     end

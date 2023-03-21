@@ -19,7 +19,10 @@ peaks.
 %}
 
 
-function [freq_peaks, amp_peaks] = fA_main_components(signal, sampling_time, settle_time)
+function [freq_peaks, amp_peaks] = fA_main_components(signal,...
+                                                      sampling_time,...
+                                                      settle_time,...
+                                                      exclude_zeroHz_in_normalization)
     
     %%% FUNCTION PARAMETER %%%
     peaks_threshold = 0.1; % threshold above which we consider the peaks relevant
@@ -34,7 +37,11 @@ function [freq_peaks, amp_peaks] = fA_main_components(signal, sampling_time, set
     freq_peaks = freqs(ref_peaks_indexes);
 
     % select only peaks above relative threshold
-    indexes = ref_peaks>(peaks_threshold*max(ref_fft));
+    if exclude_zeroHz_in_normalization
+        indexes = ref_peaks>(peaks_threshold*max(ref_fft(2:end)));
+    else
+        indexes = ref_peaks>(peaks_threshold*max(ref_fft));
+    end
     amp_peaks  = ref_peaks(indexes);
     freq_peaks = freq_peaks(indexes);
 end

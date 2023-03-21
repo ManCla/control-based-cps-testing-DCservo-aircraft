@@ -31,9 +31,12 @@ for num_p = 1:num_periods
     analysis_samples = num_p*(1/test_case.time_scaling)*(1/sampling_time);
     data_end = floor(settle_samples+analysis_samples)+1;
     % main components
-    [ref_freq_peaks,ref_amp_peaks] = fA_main_components(test_results(1:data_end,2), sampling_time, settle_time);
+    [ref_freq_peaks,ref_amp_peaks] = fA_main_components(test_results(1:data_end,2),...
+                                                        sampling_time,...
+                                                        settle_time,...
+                                                        exclude_zeroHz_in_normalization);
     % compute degree of non-linearity
     dnl = non_linearity_degree(test_results(1:data_end,3), ...
-        sampling_time,settle_time,ref_freq_peaks,ref_amp_peaks);
+        sampling_time,settle_time,ref_freq_peaks,ref_amp_peaks,exclude_zeroHz_in_normalization);
     fprintf("With %d periods Non-Linearity degree is: %f\n",num_p, dnl)
 end % iteration over number of periods

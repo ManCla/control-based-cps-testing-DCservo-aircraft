@@ -17,8 +17,8 @@ test_results = readmatrix(target_file_path);
 [ref_freqs,ref_amps] = fourier_transform_wrap(test_results(settle_time/sampling_time:end,2), sampling_time);
 [out_freqs,out_amps] = fourier_transform_wrap(test_results(settle_time/sampling_time:end,3), sampling_time);
 % main components
-[ref_freq_peaks,ref_amp_peaks] = fA_main_components(test_results(:,2), sampling_time, settle_time);
-[out_freq_peaks,out_amp_peaks] = fA_main_components(test_results(:,3), sampling_time, settle_time);
+[ref_freq_peaks,ref_amp_peaks] = fA_main_components(test_results(:,2), sampling_time, settle_time, exclude_zeroHz_in_normalization);
+[out_freq_peaks,out_amp_peaks] = fA_main_components(test_results(:,3), sampling_time, settle_time, exclude_zeroHz_in_normalization);
 
 % if saturation time quantification is available (as of now, only for the
 % DC servo), plot it. NOTE: this assumes that the number of elements logged
@@ -39,7 +39,7 @@ if min(size(test_results))>4
 end
 
 % compute degree of non-linearity
-dnl = non_linearity_degree(test_results(:,3),sampling_time,settle_time,ref_freq_peaks,ref_amp_peaks);
+dnl = non_linearity_degree(test_results(:,3),sampling_time,settle_time,ref_freq_peaks,ref_amp_peaks,exclude_zeroHz_in_normalization);
 disp("Non-Linearity degree is: ")
 disp(dnl)
 % compute filtering degree

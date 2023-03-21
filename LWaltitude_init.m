@@ -46,6 +46,12 @@ settle_time = 50;      % extra time in test for allowing for transients
 nl_threshold = 0.15;  % threshold on dnl above which we consider the teest
                       % to behave non-linearly
 
+% when true 0Hz are excluded from the input amp normalization used for the
+% main frequnecy components and the dnl. this is usefull when inputs
+% require a large offset (e.g. hovering altitude) that would exclude 
+% practically all components and always reduce the dnl to very small values 
+exclude_zeroHz_in_normalization = true;
+
 % struct containing the parameters that trigger the different types of
 % non-linearity. Not used in the LWaltitude as of now.
 sut_nl.input_non_linearity = inl_as_model;
