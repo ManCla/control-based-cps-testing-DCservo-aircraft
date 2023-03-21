@@ -24,8 +24,10 @@ function nld = non_linearity_degree(measurement,sampling_time,settle_time,main_f
     main_indexes = ismember(out_freqs,main_freqs);
     out_minor_components = out_amps(~main_indexes);
     % actual dnl computation
-    [v,i]=max(out_minor_components);
-    if exclude_zeroHz_in_normalization
+    [v,i]=max(out_minor_components); %#ok<ASGLU>
+    % when excluding 0Hz component make sure that the vector is not a
+    % single element otherwise you get an empty output (and error)
+    if exclude_zeroHz_in_normalization & (size(main_amps,2)>1) %#ok<AND2>
         nld = v/max(main_amps(2:end));
     else
         nld = v/max(main_amps);
