@@ -55,9 +55,9 @@ for s_idx = 1:length(shapes)
 
         %%%% analyse test resutls %%%%
         % (i)   compute fA main components
-        [ref_freq_peaks,ref_amp_peaks] = fA_main_components(test_results(:,2), sampling_time, settle_time);
+        [ref_freq_peaks,ref_amp_peaks] = fA_main_components(test_results(:,2), sampling_time, settle_time, exclude_zeroHz_in_normalization);
         % (ii)  compute degree of non-linearity
-        dnl = non_linearity_degree(test_results(:,3),sampling_time,settle_time,ref_freq_peaks,ref_amp_peaks);
+        dnl = non_linearity_degree(test_results(:,3),sampling_time,settle_time,ref_freq_peaks,ref_amp_peaks, exclude_zeroHz_in_normalization);
         % (iii) compute filtering degree
         dof = filtering_degree(test_results(:,3),sampling_time,settle_time,ref_freq_peaks,ref_amp_peaks);
         % (iv)  if possible, compute "ground truth" of non-lienar behaviour
