@@ -13,11 +13,11 @@ NOTE: amplutudes in the non-linear threshold upper bound are in the
 %% init search - start with thresholds at f_min and f_max
 % minimum frequency
 [amp_max, amp_min] = binary_search_sinusoidal(sut_nl, nl_threshold, num_periods, sampling_time, settle_time, ...
-                              f_min, delta_amp, amplitude_max, dir_params);
+                              f_min, delta_amp, amplitude_max, dir_params, exclude_zeroHz_in_normalization);
 nlth_upper_bound = [f_min, amp_max, amp_min]; % initialize matrix of upper bounds
 % maximum frequency
 [amp_max, amp_min] = binary_search_sinusoidal(sut_nl, nl_threshold, num_periods, sampling_time, settle_time, ...
-                              f_max, delta_amp, amplitude_max, dir_params);
+                              f_max, delta_amp, amplitude_max, dir_params, exclude_zeroHz_in_normalization);
 nlth_upper_bound = [nlth_upper_bound;
                     f_max, amp_max, amp_min]; % add to matrix of upper bounds
 
