@@ -33,13 +33,13 @@ inl_as_model = 0; %
 fnl_as_model = 0; %
 
 %% test case for preliminary evaluation
-preliminary_test_case_shape = 'steps';
-preliminary_test_case_amplitude = 200;
+preliminary_test_case_shape = 'sinus';
+preliminary_test_case_amplitude = 750;
 preliminary_test_case_time_scaling = 0.5;
 
 %% testing apporach parameters
 
-num_periods = 7;       % number of input periods included in test
+num_periods = 10;      % number of input periods included in test
 sampling_time = 0.05;  % used for logging
 settle_time = 50;      % extra time in test for allowing for transients
 
@@ -64,10 +64,10 @@ end
 % shapes list (note that it excludes the sinus shape as that is always necessary)
 shapes = ["steps", "ramp", "trapezoidal", "triangular"];
 
-f_min = 0.01;           % frequency range min
+f_min = 0.005;           % frequency range min
 f_max = 0.5;            % frequency range max
 freq_resolution = 0.05; % freq resolution to uniformly sample in test case generation
-amplitude_max = 100;    % ampliltude bound
+amplitude_max = 750;    % ampliltude bound
 delta_amp = 10;         % amplitude resolution
 
 %% subdirectory name for given type of non-linearity
