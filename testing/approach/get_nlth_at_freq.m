@@ -13,8 +13,12 @@ with sinusoidal inputs.
 
 function a_bound = get_nlth_at_freq(nlth,freq)
     i=1;
-    while nlth(i,1)>freq
+    while nlth(i,1)<freq
         i=i+1;
     end
-    a_bound = min(nlth(i+1,3),nlth(i,3));
+    if i==size(nlth,1)
+        a_bound = nlth(i,3);
+    else
+        a_bound = min(nlth(i+1,3),nlth(i,3));
+    end
 end
