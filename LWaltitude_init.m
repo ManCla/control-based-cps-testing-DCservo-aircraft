@@ -66,7 +66,7 @@ shapes = ["steps", "ramp", "trapezoidal", "triangular"];
 
 f_min = 0.005;           % frequency range min
 f_max = 0.5;             % frequency range max
-freq_resolution = 0.025; % freq resolution to uniformly sample in test case generation
+freq_resolution = 0.01;  % freq resolution to uniformly sample in test case generation
 amplitude_max = 750;     % ampliltude bound
 delta_amp = 5;           % amplitude resolution
 
