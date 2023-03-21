@@ -28,7 +28,10 @@ for s_idx = 1:length(shapes)
     % get test with amp_scale=1 and time_scale=1 for scaling coeffs
     test_case.shape = shapes(s_idx);
     [reference, ~] = generate_input_sequence(test_case, num_periods, sampling_time, settle_time);
-    [ref_freq_peaks,ref_amp_peaks] = fA_main_components(reference(:,2), sampling_time, settle_time);
+    [ref_freq_peaks,ref_amp_peaks] = fA_main_components(reference(:,2),...
+                                                        sampling_time,...
+                                                        settle_time,...
+                                                        exclude_zeroHz_in_normalization);
     [fft_amp_scale, max_amp_idx] = max(ref_amp_peaks);
     % fft_freq_scale 1 if shapes are defined over unit period and main component is lowest
     fft_freq_scale = ref_freq_peaks(max_amp_idx);
@@ -81,7 +84,10 @@ for s_idx = 1:length(shapes)
         test_case.time_scaling = test_cases(tc_idx,1); % assuming shape defined over unit period
                                                        % and that main freq is lowest
         [reference, test_duration] = generate_input_sequence(test_case, num_periods, sampling_time, settle_time);
-        [ref_freq_peaks,ref_amp_peaks] = fA_main_components(reference(:,2), sampling_time, settle_time);
+        [ref_freq_peaks,ref_amp_peaks] = fA_main_components(reference(:,2),...
+                                                            sampling_time,...
+                                                            settle_time,...
+                                                            exclude_zeroHz_in_normalization);
         frequencies = [frequencies, ref_freq_peaks]; %#ok<AGROW> 
         amplitudes  = [amplitudes,  ref_amp_peaks ]; %#ok<AGROW> 
     end
