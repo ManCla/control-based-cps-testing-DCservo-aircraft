@@ -62,11 +62,19 @@ for s_idx = 1:length(shapes)
         dof = filtering_degree(test_results(:,3),sampling_time,settle_time,ref_freq_peaks,ref_amp_peaks);
         % (iv)  if possible, compute "ground truth" of non-lienar behaviour
         sat_actuation_perc = saturation_percentage(test_results(:,4));
-        sat_sensor_perc    = saturation_percentage(test_results(:,3));
         % NOTE: we are skipping index 5 because the simulink exit at that
         % index is empty because of a refuso
-        input_nl_avg    = mean(abs(test_results(:,6)));
-        friction_nl_avg = mean(abs(test_results(:,7)));
+        % evaluate occurrence of nonlinear phenomena other than actuator
+        % saturation only if they are available
+        if size(test_results,2)>4 
+            sat_sensor_perc = saturation_percentage(test_results(:,3));
+            input_nl_avg    = mean(abs(test_results(:,6)));
+            friction_nl_avg = mean(abs(test_results(:,7)));
+        else
+            sat_sensor_perc = 0;
+            input_nl_avg    = 0;
+            friction_nl_avg = 0;
+        end
         if saturate_dnl_dof
             dnl = min(dnl,nl_threshold);
             dof = 1-min(dof,1);
