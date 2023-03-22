@@ -75,7 +75,12 @@ for s_idx = 1:length(shapes)
 
         % store fA points
         % only component with largest amplitude
-        [m,pt_idx]=max(ref_amp_peaks);
+        if exclude_zeroHz_in_normalization
+            [m,pt_idx]=max(ref_amp_peaks(2:end));
+            pt_idx = pt_idx+1;
+        else
+            [m,pt_idx]=max(ref_amp_peaks);
+        end
         point_string = sprintf("%g, %g, %g, %g, %g, %g, %g, %g", ...
                        ref_freq_peaks(pt_idx),ref_amp_peaks(pt_idx),dnl,dof(pt_idx),...
                        sat_actuation_perc, sat_sensor_perc, input_nl_avg,friction_nl_avg);
