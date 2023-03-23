@@ -10,15 +10,10 @@ For each fA point: [freq,amp,dnl,dof,sat_actuation_perc,sat_sensor_perc,input_nl
 
 %}
 
-%% some plotting parameters
-dot_size = 8; % size of dots in all scatter plot
-f_min_plot = f_min;
-f_max_plot = 3.1;
-amp_max_plot = 5;
-amp_min_plot = 0.5;
+%% plotting options
+dot_size = 8;            % size of dots in all scatter plot
+use_largest_fa_only = 1; % use only largest fA component for dnl plots
 
-% use only largest fA component for dnl plots
-use_largest_fa_only = 1;
 
 %% open ile containing sinusoidal based upperbound of nonlinear threshold
 % this is used for  plotting the nlth as reference
