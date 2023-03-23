@@ -90,6 +90,13 @@ directory = sprintf('%s/%s-%s/',dir_params.data_directory, ...
                                 dir_params.inl_names(sut_nl.input_non_linearity+1), ...
                                 dir_params.fnl_names(sut_nl.friction_non_linearity+1));
 
+%% parameters for quantification of saturation time
+actuation_min  = -20;
+actuation_max  =  20;
+sat_resolution = 0.03;
+
+
+
 %% parameters for plotting
 f_min_plot = f_min;
 f_max_plot = 0.6;
@@ -98,3 +105,5 @@ amp_min_plot = 0.9;
 
 %% printout
 fprintf('Initialized LightWeight aicraft altitude control case of study\n');
+
+

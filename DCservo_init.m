@@ -90,6 +90,13 @@ directory = sprintf('%s/%s-%s/',dir_params.data_directory, ...
                                 dir_params.inl_names(sut_nl.input_non_linearity+1), ...
                                 dir_params.fnl_names(sut_nl.friction_non_linearity+1));
 
+%% parameters for quantification of saturation time
+actuation_min  = -10;
+actuation_max  =  10;
+sensor_min  = -10;
+sensor_max  =  10;
+sat_resolution = 0.03;
+
 %% parameters for plotting
 f_min_plot = f_min;
 f_max_plot = 3.1;
