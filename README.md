@@ -1,4 +1,4 @@
-# Control-Based CPS Stress Tesing: DCservo case study
+# Control-Based CPS Stress Tesing
 
 This repository is associated to the submission of the paper _Stress Testing of Control-Based Cyber-Physical Systems_.
 It contains the model of the DC servo case study and the scripts that implement the proposed testing apporach.
