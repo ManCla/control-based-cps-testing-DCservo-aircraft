@@ -26,7 +26,7 @@ The main directory contains different scripts
 
 To execute the testing campaing execute the following commands from the matlab shell:
 
- * Run ``DCservo_init`` or``LW_altotude`` to initialise the testing process. In the DC servo case study, change lines 46 and 47 to select the non-linearites to be injected.
+ * Run ``DCservo_init`` or``LW_altitude_init`` to initialise the testing process. In the DC servo case study, change lines 46 and 47 to select the non-linearites to be injected.
  * Run ``step1`` to execute the search to retrieve the upper bound of the amplitude values.
  * Run ``step2`` to use the amplitude upper bound to generate the test set.
  * Run ``step3a`` to execute the obtained test set.
