@@ -36,10 +36,9 @@ To execute the testing campaign execute the following commands from the Matlab s
  * Run ``DCservo_init`` or``LW_altitude_init`` to initialise the testing process. In the DC servo case study, change lines 46 and 47 to select the non-linearites to be injected.
  * Run ``step1`` to execute the search to retrieve the upper bound of the amplitude values.
  * Run ``step2`` to use the amplitude upper bound to generate the test set.
- * Run ``step3a`` to execute the obtained test set.
- * Run ``step3b`` to analyse the test output (obtain frequency-amplitude points, degree of non linearity, degree of filtering, and non-linear behaviour ground truth).
- * Run ``step3c`` plot the analysis results.
-
+ * Run ``step3a_visualisation`` to execute the obtained test set.
+ * Run ``step3b_testAnalysis`` to analyse the test output (obtain frequency-amplitude points, degree of non linearity, degree of filtering, and non-linear behaviour ground truth).
+ * Run ``step3c_testExecution`` plot the analysis results.
 Each step provides its output in the form of csv files.
 Those files are stored in the folder _dcServo_test_data_\*periods_ (or _lwAltitude_test_data_\*periods_) where the \* is the number of periods executed in the tests (__note:__ this folder needs to be manually created).
 The folder contains separated subfolders for each  version of the DC servo (defined by the different non-linearities included).
