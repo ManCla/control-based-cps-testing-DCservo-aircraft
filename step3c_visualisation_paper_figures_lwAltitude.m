@@ -7,13 +7,6 @@ For each fA point: [freq,amp,dnl,dof,sat_actuation_perc,sat_sensor_perc,input_nl
 %% plotting options
 dot_size = 8;            % size of dots in all scatter plot
 
-
-%% open ile containing sinusoidal based upperbound of nonlinear threshold
-% this is used for  plotting the nlth as reference
-nlth_file_path = sprintf("%s/nlth_upper_bound_fmin%g_fmax%g_damp%g_amax%g.csv", ...
-                         directory,f_min,f_max,delta_amp,amplitude_max);
-nlth_upper_bound = readmatrix(nlth_file_path);
-
 %% plot dnl and dof by shapes
 
 fa_all = []; % init variable to collect fA points for all shapes

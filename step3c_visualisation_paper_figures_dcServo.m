@@ -7,13 +7,6 @@ For each fA point: [freq,amp,dnl,dof,sat_actuation_perc,sat_sensor_perc,input_nl
 %% plotting options
 dot_size = 8;            % size of dots in all scatter plot
 
-
-%% open ile containing sinusoidal based upperbound of nonlinear threshold
-% this is used for  plotting the nlth as reference
-nlth_file_path = sprintf("%s/nlth_upper_bound_fmin%g_fmax%g_damp%g_amax%g.csv", ...
-                         directory,f_min,f_max,delta_amp,amplitude_max);
-nlth_upper_bound = readmatrix(nlth_file_path);
-
 %% plot dnl and dof by shapes
 
 fa_all = []; % init variable to collect fA points for all shapes
@@ -83,8 +76,6 @@ subplot(1,4,1) % plot actuator saturation
 title('actuator saturation')
 hold on
 scatter(fa_all(:,1),fa_all(:,2),dot_size,'filled','CData',fa_all(:,5))
-plot(nlth_upper_bound(:,1), nlth_upper_bound(:,2))
-plot(nlth_upper_bound(:,1), nlth_upper_bound(:,3))
 hold off
 colorbar
 xlabel('Frequency')
@@ -101,8 +92,6 @@ subplot(1,4,2) % plot sensor saturation
 title('sensor saturation')
 hold on
 scatter(fa_all(:,1),fa_all(:,2),dot_size,'filled','CData',fa_all(:,6))
-plot(nlth_upper_bound(:,1), nlth_upper_bound(:,2))
-plot(nlth_upper_bound(:,1), nlth_upper_bound(:,3))
 hold off
 colorbar
 xlabel('Frequency')
@@ -119,8 +108,6 @@ subplot(1,4,3) % plot actuator saturation
 title('input non linearity')
 hold on
 scatter(fa_all(:,1),fa_all(:,2),dot_size,'filled','CData',fa_all(:,7))
-plot(nlth_upper_bound(:,1), nlth_upper_bound(:,2))
-plot(nlth_upper_bound(:,1), nlth_upper_bound(:,3))
 hold off
 colorbar
 xlabel('Frequency')
@@ -137,8 +124,6 @@ subplot(1,4,4) % plot sensor saturation
 title('friction non linearity')
 hold on
 scatter(fa_all(:,1),fa_all(:,2),dot_size,'filled','CData',fa_all(:,8))
-plot(nlth_upper_bound(:,1), nlth_upper_bound(:,2))
-plot(nlth_upper_bound(:,1), nlth_upper_bound(:,3))
 hold off
 colorbar
 xlabel('Frequency')
