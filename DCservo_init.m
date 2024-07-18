@@ -53,7 +53,8 @@ nl_threshold = 0.15;  % threshold on dnl above which we consider the teest
 exclude_zeroHz_in_normalization = false;
 
 % struct containing the parameters that trigger the different types of
-% non-linearity in the DCservo simulink model
+% non-linearity in the DCservo simulink model.
+% NOTE: inject one linearity at a time.
 sut_nl.input_non_linearity = inl_none;       % or inl_dead_zone or inl_backlash
 sut_nl.friction_non_linearity = fnl_linear;  % or fnl_quadratic_coulomb
 % check if we have both input and friction non-linearities
