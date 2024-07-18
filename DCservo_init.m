@@ -58,7 +58,8 @@ sut_nl.input_non_linearity = inl_none;
 sut_nl.friction_non_linearity = fnl_linear;
 % check if we have both input and friction non-linearities
 if sut_nl.input_non_linearity~=0 && sut_nl.friction_non_linearity~=0
-    disp('Are you sure you want to apply two non-linearities at once?')
+    disp('WARNING : Are you sure you want to apply two non-linearities at once?')
+    return;
 end
 
 % shapes list (note that it excludes the sinus shape as that is always necessary)
