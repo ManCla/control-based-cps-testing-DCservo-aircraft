@@ -8,11 +8,12 @@ It contains the scripts that implement the proposed testing approach together wi
 You will need the following add-ons in your Matlab installation:
 
  * Simulink,
- * the Control Systems Toolbox,
- * the Statistics Toolbox,
- * the Aerospace Toolbox,
- * the Aerospace Blockset,
- * the Simulink Control Design.
+ * Aerospace Blockset,
+ * Aerospace Toolbox,
+ * Control System Toolbox,
+ * Signal Processing Toolbox,
+ * Simulink Control Design,
+ * Statistics and Machine Learning Toolbox.
 
 ## Repository Structure and Content
 
