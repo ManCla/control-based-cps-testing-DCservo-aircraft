@@ -56,7 +56,7 @@ exclude_zeroHz_in_normalization = false;
 % non-linearity in the DCservo simulink model.
 % NOTE: inject one linearity at a time.
 sut_nl.input_non_linearity = inl_none;       % or inl_dead_zone or inl_backlash
-sut_nl.friction_non_linearity = fnl_linear;  % or fnl_quadratic_coulomb
+sut_nl.friction_non_linearity = fnl_linear;  % or fnl_quadratic or fnl_coulomb
 % check if we have both input and friction non-linearities
 if sut_nl.input_non_linearity~=0 && sut_nl.friction_non_linearity~=0
     disp('WARNING : Are you sure you want to apply two non-linearities at once?')
